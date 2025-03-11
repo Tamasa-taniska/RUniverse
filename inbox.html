@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox</title>
+    <style>
+        .inbox-body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .inbox-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff8e1;
+            border: 5px solid #b57d5c;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            position: relative;
+        }
+        .inbox-container:before, .inbox-container:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #b57d5c;
+            border-radius: 50%;
+            top: -10px;
+        }
+        .inbox-container:before {
+            left: -10px;
+        }
+        .inbox-container:after {
+            right: -10px;
+        }
+        .inbox-container h1 {
+            color: rgb(177, 19, 19);
+            text-align: center;
+        }
+        .inbox-message {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #ffffff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        .inbox-message h2 {
+            margin: 0;
+        }
+        .inbox-message p {
+            margin: 5px 0 0 0;
+        }
+        .inbox-reply-box {
+            display: none;
+        }
+        .inbox-button {
+            background-color: rgb(177, 19, 19);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .inbox-button:hover {
+            background-color: darkred;
+        }
+        .inbox-reply-box textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <script>
+        // Load the header content from header.html
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            });
+    </script>
+    <div class="inbox-container">
+        <h1>Inbox</h1>
+        <div class="inbox-message" id="message1">
+            <h2>Message from College</h2>
+            <p>Hello, this is an important message from the college administration.</p>
+            <button class="inbox-button" onclick="reply('message1')">Reply</button>
+            <div class="inbox-reply-box">
+                <textarea rows="4" cols="50" placeholder="Type your reply..."></textarea>
+                <br>
+                <button class="inbox-button" onclick="sendReply('message1')">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function reply(messageId) {
+            var messageElement = document.getElementById(messageId);
+            var replyBox = messageElement.querySelector('.inbox-reply-box');
+            replyBox.style.display = 'block';
+        }
+
+        function sendReply(messageId) {
+            var messageElement = document.getElementById(messageId);
+            var replyBox = messageElement.querySelector('.inbox-reply-box');
+            var replyText = replyBox.querySelector('textarea').value;
+            if (replyText.trim() !== "") {
+                alert('Reply sent: ' + replyText);
+                replyBox.style.display = 'none';
+                replyBox.querySelector('textarea').value = '';
+            } else {
+                alert('Please type a reply before sending.');
+            }
+        }
+    </script>
+</body>
+</html>
