@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-image: url('ru.jpg');
+  }
+  .login-container {
+    background-color: rgba(255, 255, 255, 0.74);
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+  }
+  .login-container h1 {
+    text-align: center;
+  }
+  .login-container input[type="text"],
+  .login-container input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 8px;
+    border: 2px solid #d1d1d1;
+    border-radius: 4px;
+  }
+  .login-container input[type="submit"] {
+    padding: 10px;
+    width: 80px;
+    margin-left: 110px;
+    background-color: #af2121;
+    color: white;
+    border: none;
+    border-radius:3px;
+    cursor: pointer;
+  }
+  .login-container input[type="submit"]:hover {
+    background-color: #575757;
+  }
+  .login-container a {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+  }
+  .login-container a:hover {
+    text-decoration: underline;
+  }
