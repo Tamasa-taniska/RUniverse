@@ -1,136 +1,96 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
 }
-
-.profile-container {
-    width: 95%; 
-    margin: 25px auto;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 5px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative; 
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.student-photo {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.student-photo img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.edit-button { 
-    position: absolute; 
-    bottom: 15px; 
-    right: 15px; 
-    background-color: rgb(180, 178, 178); 
-    border-radius: 50%; 
-    border: none; 
-    cursor: pointer; 
-    width: 30px; 
-    height: 30px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-} 
-.edit-icon { 
-    width: 15px; 
-    height: 15px; 
-    cursor: pointer; 
-}
-
-.student-info {
+nav {
+    background-color:#a02828; 
+    padding: 10px;
+    color: white;
     display: flex;
     justify-content: space-between;
+    align-items:center;
 }
-
-.column {
-    width: 48%;
-}
-
-.column p {
-    margin: 10px 0;
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
     font-size: 16px;
-    color: #333;
+    position: relative;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
 }
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+nav a:hover{
+    background-color: #3f3c3ca8;
+}
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #4e4e4e;
+    min-width: 160px;
+    margin-top: 8px;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #141414;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.container {
+    display: flex;
+    margin: 20px;
 }
 
-.profile-container {
-    width: 95%; 
-    margin: 25px auto;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 5px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative; 
-}
-
-h2 {
+.profile-photo {
+    flex: 1px;
     text-align: center;
-    margin-bottom: 20px;
 }
-
-.student-photo {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.student-photo img {
+.profile-photo img {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
     object-fit: cover;
+   border-radius: 50%;
 }
-
-.edit-button { 
-    position: absolute; 
-    bottom: 15px; 
-    right: 15px; 
-    background-color: rgb(180, 178, 178); 
-    border-radius: 50%; 
-    border: none; 
-    cursor: pointer; 
-    width: 30px; 
-    height: 30px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-} 
-.edit-icon { 
-    width: 15px; 
-    height: 15px; 
-    cursor: pointer; 
+.profile-infos {
+    flex: 5px;
+    padding:0px 50px 20px ;
+    background-color: #b8b1b1a2;
+   border-radius: 10px;
+    font-family:'Times New Roman', Times, serif;
 }
-
-.student-info {
-    display: flex;
-    justify-content: space-between;
+.profile-info {
+    margin: 20px 0px;
 }
-
-.column {
-    width: 48%;
+.edit-button, .save-button, .cancel-button {
+    background-color: #a02828;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
 }
-
-.column p {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #333;
+.edit-button:hover, .save-button:hover, .cancel-button:hover {
+    background-color: #575757;
+}
+.edit-form input, .edit-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin:10px 2px ;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+}
+.edit-form textarea {
+    resize: vertical;
 }

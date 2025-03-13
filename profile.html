@@ -3,117 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile</title>
-    <link rel="stylesheet" href="studentStyles.css">
+    <title>Faculty Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    
 </head>
-<body>
-    <div id="header-placeholder"></div>
-    <script>
-        // Load the header content from header.html
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            });
-    </script>
-    <div class="profile-container">
-        <h2>Student Details</h2>
-        <div class="student-image">
-            <img src="bg.jpeg" alt="Student Image" class="student-photo">
-        </div>
-        <div class="student-details">
-            <div class="column">
-                <p id="studentName">Student Name: John Doe</p>
-                <p id="dateOfBirth">Date of Birth: 01/01/2000</p>
-                <p id="address">Address: 123 Main St</p>
-                <p id="city">City: Cuttack</p>
-                <p id="state">State: Odisha</p>
-                <p id="mobile">Mobile: 9876543210</p>
-                <p id="course">Course: B.Tech</p>
-                <p id="branch">Branch: CSE</p>
-                <p id="bloodGroup">Blood Group: O+</p>
-            </div>
-            <div class="column">
-                <p id="rollNo">Roll No: 22DIT125</p>
-                <p id="motherName">Mother Name: Jane Doe</p>
-                <p id="district">District: Cuttack</p>
-                <p id="pinCode">Pin Code: 753001</p>
-                <p id="email">EmailID: johndoe@example.com</p>
+<!-- Navigation Bar -->
+<nav >
+    <div>
+         <a href="#">Profile</a>
+         <a href="#">Inbox</a>  
+         <a href="#" onclick="compose()">Compose</a>
+        <div class="dropdown">
+            <a href="#">Courses</a>
+            <div class="dropdown-content">
+                <a href="#">Syllabus</a>
+                <a href="#" onclick="studymaterials()">Study materials</a>
             </div>
         </div>
-        <div class="edit-button" onclick="editProfile()">
-            <img src="pencil.png" alt="Edit Profile">
+        <div class="dropdown">
+            <a href="#">Student</a>
+            <div class="dropdown-content">
+                <a href="#">Performance Tracking</a>
+                <a href="#">Assignment & Examination</a>
+            </div>
         </div>
-        
+        <a href="#">Leave Management</a>
+        <a href="#">Publication</a>
+        <a href="#">Circular</a>
+    </div>
+    <div>
+        <a href="#" onclick="logout()">Log Out</a>
+    </div>
+</nav>
+
+<!-- Profile Section -->
+<div class="container">
+    <div class="profile-photo">
+        <img src="profile.jpg" alt="Faculty Photo" id="profile-photo">
+        <input type="file" id="upload" name="photo" accept="image/*" onchange="updatePhoto()">
     </div>
 
-    <!-- Edit Profile Modal -->
-    <div id="editProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeEditProfileModal()">&times;</span>
-            <h2>Edit Profile</h2>
-            <form id="editProfileForm">
-                <div class="form-group">
-                    <label for="editStudentName">Student Name</label>
-                    <input type="text" id="editStudentName" name="studentName" value="John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="editDateOfBirth">Date of Birth</label>
-                    <input type="date" id="editDateOfBirth" name="dateOfBirth" value="2000-01-01" required>
-                </div>
-                <div class="form-group">
-                    <label for="editAddress">Address</label>
-                    <input type="text" id="editAddress" name="address" value="123 Main St" required>
-                </div>
-                <div class="form-group">
-                    <label for="editCity">City</label>
-                    <input type="text" id="editCity" name="city" value="Cuttack" required>
-                </div>
-                <div class="form-group">
-                    <label for="editState">State</label>
-                    <input type="text" id="editState" name="state" value="Odisha" required>
-                </div>
-                <div class="form-group">
-                    <label for="editMobile">Mobile</label>
-                    <input type="text" id="editMobile" name="mobile" value="9876543210" required>
-                </div>
-                <div class="form-group">
-                    <label for="editCourse">Course</label>
-                    <input type="text" id="editCourse" name="course" value="B.Tech" required>
-                </div>
-                <div class="form-group">
-                    <label for="editBranch">Branch</label>
-                    <input type="text" id="editBranch" name="branch" value="CSE" required>
-                </div>
-                <div class="form-group">
-                    <label for="editBloodGroup">Blood Group</label>
-                    <input type="text" id="editBloodGroup" name="bloodGroup" value="O+" required>
-                </div>
-                <div class="form-group">
-                    <label for="editRollNo">Roll No</label>
-                    <input type="text" id="editRollNo" name="rollNo" value="22DIT125" required>
-                </div>
-                <div class="form-group">
-                    <label for="editMotherName">Mother Name</label>
-                    <input type="text" id="editMotherName" name="motherName" value="Jane Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="editDistrict">District</label>
-                    <input type="text" id="editDistrict" name="district" value="Cuttack" required>
-                </div>
-                <div class="form-group">
-                    <label for="editPinCode">Pin Code</label>
-                    <input type="text" id="editPinCode" name="pinCode" value="753001" required>
-                </div>
-                <div class="form-group">
-                    <label for="editEmail">EmailID</label>
-                    <input type="email" id="editEmail" name="email" value="johndoe@example.com" required>
-                </div>
-                <button type="submit">Save Changes</button>
-            </form>
+    <div class="profile-infos">
+        <h2>Faculty Details</h2>
+        <!-- Faculty ID -->
+        <div class="profile-info">
+            <b>Faculty ID:  </b><span id="F-ID">AB123</span>
+        </div>
+        <!-- Name -->
+        <div class="profile-info">
+            <b>Name: </b><span id="name">Smita Sahu</span>
+        </div>
+        <!-- Mobile Number -->
+        <div class="profile-info">
+           <b>Mobile Number: </b><span id="mobile">123456789</span>
+        </div>
+        <!-- DOB -->
+        <div class="profile-info">
+           <b>Date of Birth: </b> <span id="DOB">30/01/1981</span>
+        </div>
+        <!-- Email -->
+        <div class="profile-info">
+           <b>Email: </b> <span id="email">Sahu@example.com</span>
+        </div>
+
+        <!-- Position -->
+        <div class="profile-info">
+           <b>Position: </b> <span id="position">Professor</span>
+        </div>
+
+        <!-- Address -->
+        <div class="profile-info">
+            <b>Address: </b><span id="address">Loc, City, State, Pin, Country</span>
+        </div>
+        <!--District-->
+        <div class="profile-info">
+            <b>District: </b><span id="district">Cuttack </span>
+        </div>
+        <!-- State -->
+        <div class="profile-info">
+            <b>State: </b> <span id="state">Odisha</span>
+        </div>
+        <!-- PIN -->
+        <div class="profile-info">
+            <b>Pincode: </b><span id="pincode">753001</span>
+        </div>
+        <!-- Edit Button -->
+        <button class="edit-button" onclick="editProfile()">Edit Profile</button>
+    </div>
+</div>
+
+<!-- Edit Form for Modifying Details -->
+<div id="edit-form" style="display: none;">
+    <div class="container">
+        <div class="profile-photo">
+            <img src="profile.jpg" alt="Faculty Photo" id="edit-photo" class="profile-photo">
+        </div>
+        <div class="profile-infos">
+            <h3>Edit Profile</h3>
+            <div class="edit-form">
+                <label for="edit-name">Name:</label>
+                <input type="text" id="edit-name" value="Smita Sahu">
+            </div>
+            <div class="edit-form">
+                <label for="edit-mobile">Mobile Number:</label>
+                <input type="number" id="edit-mobile" value="123456789">
+            </div>
+            <div class="edit-form">
+                <label for="edit-DOB">Date of Birth:</label>
+                <input type="text" id="edit-DOB" value="30/01/1981">
+            </div>
+            <div class="edit-form">
+                <label for="edit-email">Email:</label>
+                <input type="email" id="edit-email" value="Sahu@example.com">
+            </div>
+            <div class="edit-form">
+                <label for="edit-position">Position:</label>
+                <input type="text" id="edit-position" value="Professor">
+            </div>
+            <div class="edit-form">
+                <label for="edit-address">Address:</label>
+                <textarea id="edit-address">Loc, City, State, Pin, Country</textarea>
+            </div>
+            <div class="edit-form">
+                <label for="edit-district">District:</label>
+                <input type="text" id="edit-district" value="Cuttack">
+            </div>
+            <div class="edit-form">
+                <label for="edit-state">State:</label>
+                <input type="text" id="edit-state" value="Odisha">
+            </div>
+            <div class="edit-form">
+                <label for="edit-pincode">Pincode:</label>
+                <input type="text" id="edit-pincode" value="753001">
+            </div>
+            
+            <button class="save-button" onclick="saveChanges()">Save Changes</button>
+            <button class="cancel-button" onclick="cancelEdit()">Cancel</button>
         </div>
     </div>
-
-    <script src="scripts.js"></script>
+</div>
+<script src="profile.js"></script>
 </body>
 </html>
