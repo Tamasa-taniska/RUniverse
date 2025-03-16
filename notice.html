@@ -130,6 +130,11 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
+
+                // Attach logout event listener after header is loaded
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                window.location.href = "logout.php"; // Redirects to logout.php on click
+            });
             });
     </script>
     <div class="container">

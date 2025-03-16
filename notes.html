@@ -7,7 +7,22 @@
     <link rel="stylesheet" href="studentStyles.css">
 </head>
 <body>
-    <div class="logo-container">
+    <div id="header-placeholder"></div>
+
+    <script>
+        // Load the header content from header.html
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+
+                // Attach logout event listener after header is loaded
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                window.location.href = "logout.php"; // Redirects to logout.php on click
+            });
+            });
+    </script>
+    <!-- <div class="logo-container">
         <img src="logo.jpeg" alt="Logo" class="logo">
     </div>
     <div class="info-container">
@@ -46,7 +61,7 @@
             <li><a href="#" onclick="showAntiRaggingCell()">Anti Ragging Cell</a></li>
             <li><a href="#" onclick="showCounsellor()">Talk to Counsellor</a></li>
         </ul>
-    </nav>
+    </nav> -->
 <div class="notes-body">
     <div class="notes">
         <h1>Notes</h1>
@@ -74,6 +89,6 @@
     </div>
 </div>
 </div>
-    <script src="scripts.js"></script>
+    <!-- <script src="scripts.js"></script> -->
 </body>
 </html>
