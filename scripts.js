@@ -1,37 +1,37 @@
 document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            var errorMessage = document.getElementById("errorMessage");
+    // if (loginForm) {
+    //     loginForm.addEventListener("submit", function(event) {
+    //         event.preventDefault();
+    //         var username = document.getElementById("username").value;
+    //         var password = document.getElementById("password").value;
+    //         var errorMessage = document.getElementById("errorMessage");
 
-            // Replace these with actual valid credentials
-            var validUsername = "student123";
-            var validPassword = "password123";
+    //         // Replace these with actual valid credentials
+    //         var validUsername = "student123";
+    //         var validPassword = "password123";
 
-            if (username === validUsername && password === validPassword) {
-                alert("Login successful!");
-                window.location.href = "profile.html"; 
-            } else {
-                errorMessage.textContent = "Invalid username or password. Please try again.";
-            }
-        });
-    }
+    //         if (username === validUsername && password === validPassword) {
+    //             alert("Login successful!");
+    //             window.location.href = "profile.html"; 
+    //         } else {
+    //             errorMessage.textContent = "Invalid username or password. Please try again.";
+    //         }
+    //     });
+    // }
 
     // Logout function
-    function logout() {
-        sessionStorage.clear();
-        window.location.href = "index.html";
-        alert('Logged out successfully!');
-    }
+    // function logout() {
+    //     sessionStorage.clear();
+    //     window.location.href = "index.html";
+    //     alert('Logged out successfully!');
+    // }
 
     // Logout button
-    const logoutButton = document.getElementById('logoutButton');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', logout);
-    }
+    // const logoutButton = document.getElementById('logoutButton');
+    // if (logoutButton) {
+    //     logoutButton.addEventListener('click', logout);
+    // }
 
     // Change password button
     const changePasswordButton = document.getElementById('changePassword');

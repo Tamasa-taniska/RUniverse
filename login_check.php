@@ -16,8 +16,8 @@ if ($data->connect_error) {
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
-    $name = $_POST['username']; //email id
-    $pass = $_POST['password'];
+    $name = $_POST['username']; //email id of user
+    $pass = $_POST['password']; //corresponding password for user
 
     // Use prepared statement to prevent SQL injection
     $sql = "SELECT * FROM users WHERE email = ?";

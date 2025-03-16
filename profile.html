@@ -11,10 +11,15 @@
     <script>
         // Load the header content from header.html
         fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+
+            // Attach logout event listener after header is loaded
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                window.location.href = "logout.php"; // Redirects to logout.php on click
             });
+        });
     </script>
     <div class="profile-container">
         <h2>Student Details</h2>

@@ -16,46 +16,20 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== "Student") {
     <link rel="stylesheet" href="studentStyles.css">
 </head>
 <body>
-    <div class="logo-container">
-        <img src="logo.jpeg" alt="Logo" class="logo">
-    </div>
-    <div class="info-container">
-        <div class="student-info">
-            <p>Name: John Doe</p>
-            <p>Roll Number: 123456</p>
-        </div>
-        <div class="actions">
-            <a href="logout.php" ><button id="logoutButton">Logout</button></a>
-            <button id="changePassword">Change Password</button>
-        </div>
-    </div>
-    <nav class="navbar">
-        <ul>
-            <li><a href="profile.html" onclick="showProfile()">Profile</a></li>
-            <li><a href="Notes.html" onclick="showNotes()">Notes</a></li>
-            <li><a href="inbox.html" onclick="showInbox()">Inbox</a></li>
-            <li><a href="compose.html" onclick="showCompose()">Compose</a></li>
-            <li class="dropdown">
-                <a href="#">Scorecard</a>
-                <ul class="dropdown-content">
-                    <li><a href="#" onclick="showInternal()">Internal</a></li>
-                    <li><a href="#" onclick="showSemester()">Semester</a></li>
-                </ul>
-            </li>
-            <li><a href="#" onclick="showNotice()">Notice</a></li>
-            <li class="dropdown">
-                <a href="#">Examination</a>
-                <ul class="dropdown-content">
-                    <li><a href="#" onclick="showHallTickets()">Hall Tickets</a></li>
-                    <li><a href="#" onclick="showXerox()">Xerox</a></li>
-                    <li><a href="#" onclick="showFormFillup()">Form Fillup</a></li>
-                    <li><a href="#" onclick="showRecheck()">Recheck</a></li>
-                </ul>
-            </li>
-            <li><a href="#" onclick="showAntiRaggingCell()">Anti Ragging Cell</a></li>
-            <li><a href="#" onclick="showCounsellor()">Talk to Counsellor</a></li>
-        </ul>
-    </nav>
+    <div id="header-placeholder"></div>
+    <script>
+        // Load the header content from header.html
+        fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+
+            // Attach logout event listener after header is loaded
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                window.location.href = "logout.php"; // Redirects to logout.php on click
+            });
+        });
+    </script>
     <div class="profile-container">
         <h2>Student Details</h2>
         <div class="student-image">
@@ -154,6 +128,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== "Student") {
         </div>
     </div>
 
-    <!-- <script src="scripts.js"></script> -->
+    <script src="scripts.js"></script>
 </body>
 </html>
