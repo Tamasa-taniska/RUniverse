@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     // Verify password
     if ($row && $row["password"] === $pass) 
     { 
+        $_SESSION['email']= $row['email'];
         $_SESSION['username'] = $name; //email of user
         $_SESSION['role'] = $row["role"];
 

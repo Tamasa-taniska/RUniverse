@@ -1,10 +1,46 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== "Student") {
+if (!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role'] !== "Student") {
     session_destroy();
     header("location: login.php");
     exit();
 }
+$host = "localhost";
+$user = "root";
+$password = "@ashu2003";
+$db = "runiverse";
+
+// Create database connection
+$data = new mysqli($host, $user, $password, $db);
+
+// Check connection
+if ($data->connect_error) {
+    die("Connection failed: " . $data->connect_error);
+}
+
+$email = $_SESSION['email'];
+
+// Fetch user details from `users` table
+$sql = "SELECT u.first_name, u.last_name, u.email, u.role, u.State, u.City, u.picode, u.House_No_Building_Name, u.Road_Name_Area_Colony, 
+               s.roll_number, s.dob, s.status, s.phone_number, s.blood_group
+        FROM users u 
+        LEFT JOIN students s ON u.user_id = s.student_id
+        WHERE u.email = ?";
+        
+$stmt = $data->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$info = $result->fetch_assoc();
+
+if (!$info) {
+    die("Error: No student data found for this email.");
+}
+
+$studentName = htmlspecialchars($info['first_name'] . ' ' . $info['last_name']);
+$rollNumber = htmlspecialchars($info['roll_number']);
+
 ?>
 
 <!DOCTYPE html>
@@ -17,43 +53,127 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== "Student") {
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <script>
-        // Load the header content from header.html
-        fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
+    <!-- <script>
+        var studentName = "<?php echo $studentName; ?>";
+        var rollNumber = "<?php echo $rollNumber; ?>";
 
-            // Attach logout event listener after header is loaded
-            document.getElementById("logoutButton").addEventListener("click", function () {
+        // Load the header content from header.html
+        // fetch('header.html')
+        // .then(response => response.text())
+        // .then(data => {
+        //     document.getElementById('header-placeholder').innerHTML = data;
+
+        //     // Attach logout event listener after header is loaded
+        //     document.getElementById("logoutButton").addEventListener("click", function () {
+        //         window.location.href = "logout.php"; // Redirects to logout.php on click
+        //     });
+        // });
+        fetch('header.html')
+.then(response => response.text())
+.then(data => {
+    document.getElementById('header-placeholder').innerHTML = data;
+})
+.then(() => {  
+    // Wait for the header to load before modifying elements
+    setTimeout(() => {
+        let nameElement = document.getElementById("headerStudentName");  // Updated ID
+        let rollElement = document.getElementById("headerRollNumber");  // Updated ID
+        let logoutButton = document.getElementById("logoutButton");
+
+        if (nameElement && rollElement) {
+            nameElement.textContent = "Name: " + studentName;
+            rollElement.textContent = "Roll Number: " + rollNumber;
+            console.log("Header updated successfully!");
+        } else {
+            console.error("Header elements not found!");
+        }
+
+        // Attach logout event listener after header loads
+        if (logoutButton) {
+            logoutButton.addEventListener("click", function () {
                 window.location.href = "logout.php"; // Redirects to logout.php on click
             });
-        });
-    </script>
+            console.log("Logout button event listener added.");
+        } else {
+            console.error("Logout button not found!");
+        }
+
+    }, 300); // Slightly increased delay for header loading
+})
+.catch(error => console.error("Error loading header:", error));
+
+
+    </script> -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var studentName = "<?php echo $studentName; ?>";
+    var rollNumber = "<?php echo $rollNumber; ?>";
+
+    // Load the header content dynamically
+    fetch('header.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+    })
+    .then(() => {
+        // Ensure the header is fully loaded before modifying elements
+        setTimeout(() => {
+            let nameElement = document.querySelector("#headerStudentName span");
+            let rollElement = document.querySelector("#headerRollNumber span");
+            let logoutButton = document.getElementById("logoutButton");
+
+            if (nameElement && rollElement) {
+                nameElement.textContent = studentName;
+                rollElement.textContent = rollNumber;
+                console.log("✅ Header updated successfully!");
+            } else {
+                console.error("❌ Header elements not found!");
+            }
+
+            // Attach logout event listener
+            if (logoutButton) {
+                logoutButton.addEventListener("click", function () {
+                    window.location.href = "logout.php";
+                });
+                console.log("✅ Logout button event listener added.");
+            } else {
+                console.error("❌ Logout button not found!");
+            }
+
+        }, 500); // Slightly increased delay to ensure the header loads before update
+    })
+    .catch(error => console.error("❌ Error loading header:", error));
+});
+
+</script>
+
     <div class="profile-container">
         <h2>Student Details</h2>
         <div class="student-image">
             <img src="bg.jpeg" alt="Student Image" class="student-photo">
         </div>
+
+        
         <div class="student-details">
             <div class="column">
-                <p id="studentName">Student Name: John Doe</p>
-                <p id="dateOfBirth">Date of Birth: 01/01/2000</p>
-                <p id="address">Address: 123 Main St</p>
-                <p id="city">City: Cuttack</p>
-                <p id="state">State: Odisha</p>
-                <p id="mobile">Mobile: 9876543210</p>
-                <p id="course">Course: B.Tech</p>
-                <p id="branch">Branch: CSE</p>
-                <p id="bloodGroup">Blood Group: O+</p>
+                <p id="studentName"><b>Student Name:</b> <?php echo htmlspecialchars($info['first_name'] . " " . $info['last_name']); ?></p>
+                <p id="dateOfBirth"><b>Date of Birth:</b> <?php echo htmlspecialchars($info['dob'] ?? 'Not Available'); ?></p>
+                <p id="address"><b>House No/ Building Name:</b> <?php echo htmlspecialchars($info['House_No_Building_Name']); ?></p>
+                <p id="city"><b>City:</b> <?php echo htmlspecialchars($info['City']); ?></p>
+                <p id="state"><b>State:</b> <?php echo htmlspecialchars($info['State']); ?></p>
+                <p id="mobile"><b>Mobile:</b> <?php echo htmlspecialchars($info['phone_number'] ?? 'Not Available'); ?></p>
+                <!-- <p id="course">Course: B.Tech</p>
+                <p id="branch">Branch: CSE</p> -->
+                <p id="bloodGroup"><b>Blood Group:</b> <?php echo htmlspecialchars($info['blood_group'] ?? 'Not Available'); ?></p>
             </div>
             <div class="column">
-                <p id="rollNo">Roll No: 22DIT125</p>
-                <p id="motherName">Mother Name: Jane Doe</p>
-                <p id="district">District: Cuttack</p>
-                <p id="pinCode">Pin Code: 753001</p>
-                <p id="email">EmailID: johndoe@example.com</p>
+                <p id="rollNo"><b>Roll No:</b> <?php echo htmlspecialchars($info['roll_number']); ?></p>
+                <!-- <p id="motherName">Mother Name: Jane Doe</p> -->
+                <!-- <p id="district">District: Cuttack</p> -->
+                <p id="pinCode"><b>Pin Code:</b> <?php echo htmlspecialchars($info['picode']); ?></p>
+                <p id="email"><b>EmailID:</b> <?php echo htmlspecialchars($info['email']); ?></p>
             </div>
+            
         </div>
         <div class="edit-button" onclick="editProfile()">
             <img src="pencil.png" alt="Edit Profile">
