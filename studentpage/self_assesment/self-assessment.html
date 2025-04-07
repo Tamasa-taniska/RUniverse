@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Assessment Tool</title>
+    <link rel="stylesheet" href="assessment.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <script>
+        // Load the header content from header.html
+        fetch('header.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            });
+    </script>
+    <div class="container">
+        <h1>Self-Assessment Tool</h1>
+        <div class="flex-container">
+            <div class="topic">
+                <img src="alcohol.jpg" alt="Alcohol Addiction" class="topic-image">
+                <h2>Alcohol Addiction</h2>
+                <p>Assess your drinking habits and understand your risk level.</p>
+                <a href="alcohol.html" class="button">Begin Test Now</a>
+            </div>
+            <div class="topic">
+                <img src="internet.jpg" alt="Internet Addiction" class="topic-image">
+                <h2>Internet Addiction</h2>
+                <p>Evaluate your online habits and their impact on your life.</p>
+                <a href="internet.html" class="button">Begin Test Now</a>
+            </div>
+            <div class="topic">
+                <img src="coping_resilience.jpg" alt="Coping & Resilience" class="topic-image">
+                <h2>Coping & Resilience</h2>
+                <p>Assess your coping strategies and resilience skills.</p>
+                <a href="coping_resilience.html" class="button">Begin Test Now</a>
+            </div>
+            <div class="topic">
+                <img src="anger.jpg" alt="Anger" class="topic-image">
+                <h2>Anger</h2>
+                <p>Evaluate your anger management and control.</p>
+                <a href="anger.html" class="button">Begin Test Now</a>
+            </div>
+            <div class="topic">
+                <img src="depression.jpg" alt="General Depression" class="topic-image">
+                <h2>General Depression</h2>
+                <p>Assess your mood and emotional well-being.</p>
+                <a href="depression.html" class="button">Begin Test Now</a>
+            </div>
+            <div class="topic">
+                <img src="studystress.jpg" alt="Study Stress" class="topic-image">
+                <h2>Study Stress</h2>
+                <p>Evaluate your academic stress and coping strategies.</p>
+                <a href="studystress.html" class="button">Begin Test Now</a>
+            </div>
+            <div class="topic">
+                <img src="b&h.jpg" alt="Bullying & Harassment" class="topic-image">
+                <h2>Bullying & Harassment</h2>
+                <p>Assess your experiences with bullying and harassment.</p>
+                <a href="b&h.html" class="button">Begin Test Now</a>
+            </div>
+            <div class="topic">
+                <img src="manage.jpg" alt="Manageability" class="topic-image">
+                <h2>Manageability</h2>
+                <p>Evaluate your ability to manage responsibilities and stress.</p>
+                <a href="manageability.html" class="button">Begin Test Now</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

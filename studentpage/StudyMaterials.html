@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Material Upload</title>
+     <link rel="stylesheet" href="StudyMaterials.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <script>
+        // Load the header content from header.html
+        fetch('theader.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            });
+    </script>
+    <div class="container">
+        <h1>Study Materials</h1>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="semester">Semester</label>
+                <select id="semester" name="semester" required>
+                    <option value="">Select Semester</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject Name</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="file">Upload File</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="uploaded-materials">
+            <h2>Uploaded Materials</h2>
+            <ul id="uploadedList"></ul>
+        </div>
+    </div>
+<script src="StudyMaterials.js"></script>
+</body>
+</html>
