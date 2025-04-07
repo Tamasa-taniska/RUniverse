@@ -1,0 +1,289 @@
+/* Landing Page CSS*/
+/* Logo */
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.rulogo {
+    width: 300px;
+}
+
+/* Background image */
+.bg {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Landing page table */
+.landing_table {
+    font-size: 18px;
+    background-color: rgb(177, 19, 19);
+    width: 100%;
+    padding-left: 10px;
+    border-collapse: collapse;
+}
+
+/* Landing page Table data */
+.landing_table td {
+    cursor: pointer;
+    padding: 15px; 
+    color: white;
+}
+.imp_notice{
+    background-color: rgb(177, 19, 19);
+    color: white;
+    width: 160px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+/* Dropdown container */
+.dropdown {
+    display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    border: 1px solid white;
+}
+
+/* Dropdown items */
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: rgb(98, 96, 96);
+}
+
+.dropdown-content a:hover {
+    background-color: rgb(177, 19, 19);
+    color: white;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Hover dropdown color */
+.landing_table td:hover {
+    background-color: rgb(222, 8, 8);
+}
+
+/* button */
+
+.login_button {
+    background-color: transparent;
+    color: #006666;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.login_button:hover {
+    background-color: rgb(9, 206, 9);
+}
+
+/* button animations */
+button {
+    transition: transform 0.1s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* welcome RUMC text */
+.welcome_rumc {
+    font-size: 48px;
+    font-weight: bold;
+    color: #3b82f6;
+    padding-left: 90px;
+    padding-top: 50px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* all headings */
+.heading {
+    font-size: 40px;
+    color: rgb(177, 19, 19);
+    font-weight: bold;
+    text-align: center;
+}
+
+.sub_heading {
+    font-size: 30px;
+    color: rgb(177, 19, 19);
+    font-weight: bold;
+    text-align: left;
+    padding-left: 40px;
+}
+
+/* all paragraph texts */
+.paragraph_text {
+    font-size: 14px;
+    padding-left: 50px;
+    padding-right: 50px;
+    letter-spacing: 1px;
+    word-spacing: 4px;
+    line-height: 1.6;
+}
+
+/* read more button */
+.readmore {
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: white;
+    background-color: rgb(177, 19, 19);
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.readmore:hover {
+    background-color: rgb(209, 23, 23);
+}
+
+/* Institutional Vision lists */
+ul {
+    list-style-type: square;
+    padding-left: 70px;
+    font-size: 18px;
+    padding-right: 70px;
+    padding-top: 20px;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    line-height: 1.6;
+}
+
+li {
+    padding-top: 15px;
+}
+
+hr {
+    width: 90%;
+    background-color: black;
+    color: black;
+}
+
+
+/* research table */
+.research_table {
+    font-size: 25px;
+    font-weight: bold;
+    width: 60%;
+    margin: auto;
+    justify-content: center;
+}
+
+.sub_researchbar {
+    font-size: 18px;
+    font-weight: lighter;
+    justify-content: center;
+}
+
+/* research flex */
+
+.research_container {
+    display: flex;
+    gap: 25px;
+    flex-direction: row;
+    justify-content: center;
+    /* Centers horizontally */
+    align-items: center;
+}
+
+.research_box_item {
+    border-style: none;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease-in-out;
+    max-width: 280px;
+    max-height: 380px;
+    border-radius: 20px;
+    padding-top: 15px;
+
+}
+
+.research_box_item:hover {
+    transform: scale(1.1);
+}
+
+.research_box_item img {
+    display: block;
+    /* Ensures the image behaves like a block element */
+    margin: 0 auto;
+    /* Centers the image horizontally */
+    width: 80%;
+    /* Keep your existing width */
+}
+
+.research_paragraph {
+    color: rgb(253, 253, 253);
+    font-family: arial;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    font-size: 18px;
+    width: 100%;
+    padding-left: 10px;
+    border-collapse: collapse;
+    text-align: center;
+    color: white;
+}
+
+.footer_hr {
+    width: 90%;
+    background-color: #707070;
+}
+
+.footer_heading {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.footer_subcontent {
+    text-align: left;
+    font-size: small;
+    padding-top: 2px;
+}
+
+.footer_bottom {
+    text-align: center;
+    padding-top: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+    background-color: rgb(177, 19, 19);
+}
+
+.quick_links{
+    color: white;
+    text-decoration: none;
+}
+
+.footer table td{
+    padding-right: 50px;
+}
+
+/*  */

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Gallery</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: sans-serif;
+        }
+
+        h1 {
+            color: coral;
+        }
+
+        .grid-container {
+            columns: 5 200px;
+            column-gap: 1.5rem;
+            width: 90%;
+            margin: 0 auto;
+
+            div {
+                width: 150px;
+                margin: 0 1.5rem 1.5rem 0;
+                display: inline-block;
+                width: 100%;
+                border: solid 2px black;
+                padding: 5px;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+                border-radius: 5px;
+                transition: all .25s ease-in-out;
+
+                &:hover img {
+                    filter: grayscale(0);
+                }
+
+                &:hover {
+                    border-color: coral;
+                }
+
+                img {
+                    width: 100%;
+                    filter: grayscale(100%);
+                    border-radius: 5px;
+                    transition: all .25s ease-in-out;
+                }
+
+                p {
+                    margin: 5px 0;
+                    padding: 0;
+                    text-align: center;
+                    font-style: italic;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid-container">
+        <div>
+            <img class='grid-item grid-item-1' src='images/pic1.jpeg' alt=''>
+            <p>"Ravenshaw Mahanadi Campus"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-2' src='images/pic2.jpeg' alt=''>
+            <p>"RUMC Bird-eye"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-3' src='images/ru1.jpg' alt=''>
+            <p>"Touch of Sunrise"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-4' src='images/ru2.jpg' alt=''>
+            <p>"The Road Not Taken"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-5' src='images/ru3.jpg' alt=''>
+            <p>"The Kanika Library"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-6' src='images/ru4.jpg' alt=''>
+            <p>"Empire in Winters"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-7' src='images/ru5.jpg' alt=''>
+            <p>"Seven Pillars Of Wisedom"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-8' src='images/ru6.jpg' alt=''>
+            <p>"Fest Day"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-9' src='images/ru7.jpg' alt=''>
+            <p>"The Founding Stone"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-10' src='images/ru8.jpg' alt=''>
+            <p>"Night Lawn"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-11' src='images/ru9.jpg' alt=''>
+            <p>"The Professional Corner"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-12' src='images/ru10.jpg' alt=''>
+            <p>"The Antique Building"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-12' src='images/ru11.jpg' alt=''>
+            <p>"Ganesh Puja"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-12' src='images/ru_radio.jpeg' alt=''>
+            <p>"Ravenshaw Radio"</p>
+        </div>
+        <div>
+            <img class='grid-item grid-item-12' src='https://pin.it/2IUc7DoVM' alt=''>
+            <p>"Ravenshaw Radio"</p>
+        </div>
+        
+
+    </div>
+</body>
+
+</html>

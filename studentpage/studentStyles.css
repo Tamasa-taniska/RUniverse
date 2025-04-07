@@ -1,0 +1,411 @@
+.profile-container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; 
+}
+
+.profile-container h2 {
+    text-align: center;
+}
+
+.student-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.student-photo {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.student-details {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.column {
+    width: 48%;
+}
+
+.edit-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(177, 19, 19);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.edit-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+.edit-button:hover {
+    background-color: #a31212;
+}
+
+
+/* Modal Styles */
+.edit-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.edit-modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* inbox.css */
+.inbox-body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+.inbox-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff8e1;
+    border: 5px solid #b57d5c;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    position: relative;
+}
+.inbox-container:before, .inbox-container:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #b57d5c;
+    border-radius: 50%;
+    top: -10px;
+}
+.inbox-container:before {
+    left: -10px;
+}
+.inbox-container:after {
+    right: -10px;
+}
+.inbox-container h1 {
+    color: rgb(177, 19, 19);
+    text-align: center;
+}
+.inbox-message {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+.inbox-message h2 {
+    margin: 0;
+}
+.inbox-message p {
+    margin: 5px 0 0 0;
+}
+.inbox-reply-box {
+    display: none;
+}
+.inbox-button {
+    background-color: rgb(177, 19, 19);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.inbox-button:hover {
+    background-color: darkred;
+}
+.inbox-reply-box textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Notes */
+.notes-body {
+    margin: 50px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+.notes {
+    background: rgb(177, 19, 19);
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    cursor: pointer;
+    color: #fffdfd;
+}
+
+.hidden {
+    display: none;
+}
+
+.notes select {
+    width: 100%;
+    padding: 0px;
+    margin-top: 0px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notes-item li {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.notes-item a {
+    text-decoration: none;
+    color: rgb(245, 255, 63);
+}
+
+.notes-item a:hover {
+    text-decoration: underline;
+}
+
+/* Compose.css */
+.compose-body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh
+}
+
+#compose-email {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+}
+
+#compose-email label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#compose-email input[type="text"],
+#compose-email textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#compose-email textarea {
+    resize: vertical;
+}
+
+#compose-email button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(177, 19, 19);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#compose-email button:hover {
+    background-color: #a31212;
+}
+
+/* notice.css */
+.notice-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: calc(100% - 200px); 
+    margin: 20px auto; 
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Notices section */
+.notices {
+    width: 65%; 
+    overflow: hidden;
+    height: 500px;
+    border-right: 2px solid #007bff;
+    padding-right: 20px;
+}
+
+.notice {
+    background-color: #e9ecef;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Calendar section */
+.calendar-container {
+    width: 35%; 
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.calendar-header button {
+    background: rgb(177, 19, 19);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.days, .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    padding: 10px;
+}
+
+.days span {
+    font-weight: bold;
+}
+
+.dates div {
+    background: #e3e3e3;    
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.dates div:hover {
+    background: #ddd;
+}
+
+.event-day {
+    background: #007bff;
+    color: white;
+}
+
+/* Modal Styling */
+.event-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.event-modal-content {
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.event-close {
+    float: right;
+    cursor: pointer;
+}

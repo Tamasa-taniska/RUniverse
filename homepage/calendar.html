@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Calendar with Events</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: white;
+        }
+
+        .calendar-container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            font-size: 1.2em;
+        }
+
+        button {
+            background: rgb(177, 19, 19);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .days, .dates {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .days span {
+            font-weight: bold;
+        }
+
+        .dates div {
+            background: #e3e3e3;    
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .dates div:hover {
+            background: #ddd;
+        }
+
+        .event-day {
+            background: #007bff;
+            color: rgb(177, 19, 19);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .modal-content {
+            text-align: center;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .close {
+            float: right;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prevMonth">◀</button>
+            <h2 id="monthYear"></h2>
+            <button id="nextMonth">▶</button>
+        </div>
+        <div class="calendar">
+            <div class="days">
+                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            </div>
+            <div id="calendarDays" class="dates"></div>
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Event</h2>
+            <input type="text" id="eventText" placeholder="Event Details">
+            <button id="saveEvent">Save</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const monthYear = document.getElementById("monthYear");
+            const calendarDays = document.getElementById("calendarDays");
+            const prevMonthBtn = document.getElementById("prevMonth");
+            const nextMonthBtn = document.getElementById("nextMonth");
+
+            const modal = document.getElementById("eventModal");
+            const closeModal = document.querySelector(".close");
+            const eventText = document.getElementById("eventText");
+            const saveEventBtn = document.getElementById("saveEvent");
+
+            let currentDate = new Date();
+            let events = JSON.parse(localStorage.getItem("events")) || {}; // Store events in localStorage
+
+            function loadCalendar() {
+                calendarDays.innerHTML = "";
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth();
+
+                const firstDay = new Date(year, month, 1).getDay();
+                const totalDays = new Date(year, month + 1, 0).getDate();
+
+                monthYear.innerText = `${currentDate.toLocaleString("default", { month: "long" })} ${year}`;
+
+                for (let i = 0; i < firstDay; i++) {
+                    calendarDays.innerHTML += `<div></div>`;
+                }
+
+                for (let day = 1; day <= totalDays; day++) {
+                    let dateKey = `${year}-${month}-${day}`;
+                    let dayElement = document.createElement("div");
+                    dayElement.textContent = day;
+
+                    if (events[dateKey]) {
+                        dayElement.classList.add("event-day");
+                    }
+
+                    dayElement.addEventListener("click", () => openEventModal(dateKey));
+                    calendarDays.appendChild(dayElement);
+                }
+            }
+
+            function openEventModal(dateKey) {
+                modal.style.display = "block";
+                eventText.value = events[dateKey] || "";
+
+                saveEventBtn.onclick = function () {
+                    events[dateKey] = eventText.value;
+                    localStorage.setItem("events", JSON.stringify(events));
+                    modal.style.display = "none";
+                    loadCalendar();
+                };
+            }
+
+            closeModal.onclick = function () {
+                modal.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+            prevMonthBtn.onclick = function () {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                loadCalendar();
+            };
+
+            nextMonthBtn.onclick = function () {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                loadCalendar();
+            };
+
+            loadCalendar();
+        });
+    </script>
+</body>
+</html>

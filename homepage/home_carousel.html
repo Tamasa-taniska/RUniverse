@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel / Slider using Owl Carousel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <style>
+        body {
+            background-color: wheat;
+            font-family: Arial, sans-serif;
+        }
+
+        .owl-carousel .owl-item img {
+            display: block;
+            width: 17%;
+            float: left;
+            border: 5px solid #fff;
+            border-radius: 20px;
+            margin-left: 54px;
+            margin-right: 35px;
+            margin-top: 15px;
+        }
+
+        .slider-item.equal-height.style-6 {
+            background-color: #eee;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        .cell-right {
+            text-align: center;
+            margin-right: 80px;
+            padding-top: 35px;
+            padding-bottom: 20px;
+        }
+
+        .header {
+            font-weight: 600;
+        }
+
+        .details.quote {
+            padding: 17px 55px;
+        }
+
+        .et_right_sidebar #main-content .container:before {
+            display: none;
+        }
+
+        #main-content .container {
+            padding-top: 10px;
+        }
+
+        i.fa.fa-quote-left {
+            padding: 0px 10px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="main-slider" class="owl-carousel">
+            <div class="slider-item equal-height style-6" style="height: 254px;">
+                <div class="slider-image cell-left">
+                    <img decoding="async" src="images/davadatta.jpg" alt="Elephant">
+                </div>
+                <div class="cell-right">
+                    <div class="header">Devadatt Pattanaik
+                    </div>
+                    <div class="desc">Indian mythologist
+                    </div>
+                </div>
+                <div class="details quote"><i class="fa fa-quote-left">
+                    </i>My visit to Ravenshaw will always be one of my most memorable experiences. Seeing my
+                    grandfather's name on the board of Mathematics department was an emotionally fulfilling experience.
+                </div>
+            </div>
+            <div class="slider-item equal-height style-6" style="height: 254px;">
+                <div class="slider-image cell-left">
+                    <img decoding="async" src="images/gobardhan.jpg" alt="Rose">
+                </div>
+                <div class="cell-right">
+                    <div class="header"> Prof. Goverdhan Mehta
+                    </div>
+                    <div class="desc">Scientist, former Director of IISc
+                    </div>
+                </div>
+                <div class="details quote"><i class="fa fa-quote-left">
+                    </i>It was a delightful experience to visit Ravenshaw University to present an endowed lecture and
+                    see its splendid campus and witness its aspirational journey from an iconic college (Ravenshaw
+                    College) to find its place among the leading universities in the country. It was a pleasure also to
+                    interact with many of its committed faculty and talented students. My best wishes in your journey
+                    towards excellence
+                </div>
+            </div>
+            <div class="slider-item equal-height style-6" style="height: 254px;">
+                <div class="slider-image cell-left">
+                    <img decoding="async" src="images/kseth.jpg" alt="Rose">
+                </div>
+                <div class="cell-right">
+                    <div class="header">Prof. Prahlad K. Seth
+                    </div>
+                    <div class="desc">Scientist, former director of CSIR-IITR
+                    </div>
+                </div>
+                <div class="details quote"><i class="fa fa-quote-left">
+                    </i>I am overwhelmed and feel honoured to be in this most prestigious august Institution- Ravenshaw-
+                    that is so very well- known across the country.
+                </div>
+            </div>
+            <div class="slider-item equal-height style-6" style="height: 254px;">
+                <div class="slider-image cell-left">
+                    <img decoding="async" src="images/narinder.jpg" alt="Rose">
+                </div>
+                <div class="cell-right">
+                    <div class="header">Prof. Narinder K. Mehra
+                    </div>
+                    <div class="desc">Indian Immunologist
+                    </div>
+                </div>
+                <div class="details quote"><i class="fa fa-quote-left">
+                    </i>I am thrilled to be in this historic and most beautiful institution. The Best of Odisha have studied here.
+                </div>
+            </div>
+            
+
+
+            
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#main-slider").owlCarousel({
+                items: 2,
+                itemsDesktop: [1000, 2],
+                itemsDesktopSmall: [980, 1],
+                itemsTablet: [768, 1],
+                pagination: true,
+                navigation: true,
+                navigationText: ["<", ">"],
+                autoPlay: true
+            });
+        });
+    </script>
+</body>
+
+</html>
