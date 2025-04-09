@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+nav {
+    background-color:#a02828; 
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+    position: relative;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+}
+nav a:hover{
+    background-color: #3f3c3ca8;
+}
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #4e4e4e;
+    min-width: 160px;
+    margin-top: 8px;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #141414;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.container {
+    display: flex;
+    margin: 20px;
+}
+.profile-photo {
+    flex:2;
+    text-align: center;
+}
+.profile-photo img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.profile-infos {
+    flex: 5;
+    padding:0px 50px 20px ;
+    background-color: #b8b1b1a2;
+    border-radius: 10px;
+    font-family:'Times New Roman', Times, serif;
+}
+.profile-info {
+    margin: 20px 0px;
+}
+.edit-button, .save-button, .cancel-button {
+    background-color: #a02828;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.edit-button:hover, .save-button:hover, .cancel-button:hover {
+    background-color: #575757;
+}
+.edit-form input, .edit-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin:10px 2px ;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+}
+.edit-form textarea {
+    resize: vertical;
+}
