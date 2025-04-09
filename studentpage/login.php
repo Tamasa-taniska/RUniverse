@@ -43,7 +43,7 @@ session_start();
             <button type="submit">Login</button>
             <!-- <p id="errorMessage" class="error-message"></p> -->
             <!-- <p><a href="#" id="forgotPassword">Forgot Password?</a></p> -->
-            <p><a href="forgot_password.php" id="forgotPassword" name="forgotpassword" >Forgot Password?</a></p>
+            <p><a href="update_password.php" id="forgotPassword" name="forgotpassword" >Forgot Password?</a></p>
         </form>
     </div>
     <!-- <script src="scripts.js"></script> -->
