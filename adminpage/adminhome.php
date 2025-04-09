@@ -1,0 +1,87 @@
+<?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== "Admin") {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+?> 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" type="text/css" href="admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="">Admin Dashboard</a>
+        <div class="logout">
+            <a href="logout.php" class="btn btn-primary">Logout</a>
+        </div>
+    </header>
+
+    <aside>
+        <ul>
+            <li>
+                <a href="">Student Registration</a>
+            </li>
+            <li>
+                <a href="">Faculty Registration</a>
+            </li>
+            <li>
+                <a href="">Subject Entry</a>
+            </li>
+            <li>
+                <a href="">Faculty Allotment</a>
+            </li>
+            <li>
+                <a href="">Notice/Event Publication</a>
+            </li>
+            <li>
+                <a href="">Publish Results</a>
+            </li>
+            <li>
+                <a href="">Add Admin</a>
+            </li>
+        </ul>
+    </aside>
+    
+    <div class="profile-container">
+        <h2>Admin Details</h2>
+        <div class="Admin-image">
+            <img src="bg.jpeg" alt="Admin Image" class="Admin-photo">
+        </div>
+        <div class="Admin-details">
+            <div class="column">
+                <p id="AdminName"><b>Admin Name: </b>Ashutosh Tripathy</p>
+                <p id="dateOfBirth"><b>Date of Birth: </b> 01/01/1950</p>
+                <p id="address"><b>House No/ Building Name: </b>123, Nadikula Campus</p>
+                <p id="address"><b>Road Name/ Area/ Colony: </b>Naraj Road, CDA Sector-13</p>
+                <p id="city"><b>City: </b>Cuttack</p>
+                <p id="state"><b>State: </b>Odisha</p>
+                <p id="mobile"><b>Mobile: </b>9876543210</p>
+                <!-- <p id="course"><b>Course: </b>B.Sc</p>
+                <p id="branch"><b>Department: </b>ITM</p> -->
+                <p id="bloodGroup"><b>Blood Group: </b>O+</p>
+            </div>
+            <div class="column">
+                <p id="rollNo"><b>Admin ID: </b>Mai Nahi Bataunga</p>
+                <p id="district"><b>District: </b>Cuttack</p>
+                <p id="pinCode"><b>Pin Code: </b>753003</p>
+                <p id="email"><b>EmailID: </b>ratikantbiswal@hod.com</p>
+            </div>
+        </div>
+        <div class="edit-button" onclick="editProfile()">
+            <img src="pencil.png" alt="Edit Profile">
+        </div>
+        
+    </div>
+</body>
+
+</html>

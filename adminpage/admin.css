@@ -1,0 +1,120 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.header{
+    /* background-color: aqua; */
+    line-height: 70px;
+    padding-left: 30px;
+    background-color: rgb(177, 19, 19);
+    overflow: hidden;
+    font-size: large;
+}
+
+.header a{
+    color: white;
+}
+
+a, a:hover{
+    text-decoration: none!important;
+}
+
+.logout{
+    float: right;
+    padding-right: 30px;
+}
+
+ul{
+    background-color:#424a5b;
+    width: 14%;
+    height: 100%;
+    position:absolute;
+    padding-top: 5%;
+    padding-right: 5%;
+    text-align: center;
+}
+
+ul li{
+    list-style: none;
+    padding-bottom: 30px;
+    font-size: 15px;
+}
+
+ul li a{
+    color: white;
+    font-weight: bold;
+}
+
+ul li a:hover
+{
+    color: aqua;
+    text-decoration: none;
+}
+
+/* .content
+{
+    margin-left: 20%;
+    margin-top: 5%;
+} */
+
+.profile-container {
+    margin: 1% 15%;
+    width: 84%;
+    height: 120%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Added for the edit button */
+}
+
+.profile-container h2 {
+    text-align: center;
+}
+
+.Admin-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.Admin-photo {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.Admin-details {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.column {
+    width: 48%;
+}
+
+.edit-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(177, 19, 19);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.edit-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+.edit-button:hover {
+    background-color: #a31212;
+}
