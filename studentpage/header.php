@@ -55,7 +55,7 @@ if (!$info) {
                     <a href="#">Scorecard</a>
                     <ul class="dropdown-content">
                         <li><a href="internal.php">Internal</a></li>
-                        <li><a href="semester.php">Semester</a></li>
+                        <li><a href="/ravenshaw/adminpage/student/view-marks.php">Semester</a></li>
                     </ul>
                 </li>
                 <li><a href="notice.html">Notice</a></li>

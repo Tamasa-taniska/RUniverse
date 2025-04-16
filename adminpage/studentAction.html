@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <style>
+        /* Container */
+        .container {
+            width: 95%; 
+            max-width: 600px; /* Set a max width for larger screens */
+            margin: 25px auto; /* Center the container */
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading */
+        h1 {
+            color: #333;
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Add some space below the heading */
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Button Colors */
+        .promote { background: #28a745; color: white; }
+        .graduate { background: #dc3545; color: white; }
+        .new-batch { background: #007bff; color: white; }
+
+        /* Hover Effect */
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Space between navbar and container */
+        #header-placeholder {
+            margin-bottom: 20px; /* Add space below the navbar */
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <script>
+        // Load the header content from header.html
+        fetch('a_header.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            });
+    </script>
+    <div class="container">
+        <h1>Student Management Portal</h1>
+        <p>Manage student promotions and new batches seamlessly.</p>
+
+        <form method="POST" action="promote_students.php">
+            <button type="submit" class="btn promote">Promote Students to Next Semester</button>
+        </form>
+
+        <form method="POST" action="manage_students.php">
+            <button type="submit" name="graduate" class="btn graduate">Graduate Final Semester Students</button>
+        </form>
+
+        <form method="POST" action="student_registration.php">
+            <button type="submit" name="new_batch" class="btn new-batch">Add 1st-Year Students (New Batch)</button>
+        </form>
+    </div>
+</body>
+</html>

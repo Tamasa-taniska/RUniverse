@@ -153,7 +153,9 @@ h3 select {
     </style>
 </head>
 <body>
-    <div class="login-container"><h2>Forgot Password</h2>
+    <div class="login-container"><h2>Forgot Password 
+        <a href="login.php" style="font-size: 15px;">HOME</a>
+    </h2>
     <p style="color:red;"><?php echo isset($msg) ? $msg : ''; ?></p>
 
     <?php if (!isset($_SESSION['step']) || $_SESSION['step'] === 1): ?>
@@ -168,7 +170,7 @@ h3 select {
             
             <label>Enter Email:</label>
             <input type="email" name="email" required><br><br>
-            <button type="submit">Send OTP</button>
+            <button type="submit">Send OTP</button> <br><br>
         </form>
 
     <?php elseif ($_SESSION['step'] === 2): ?>
@@ -187,6 +189,9 @@ h3 select {
             <button type="submit">Reset Password</button>
         </form>
     <?php endif; ?></div>
+    <form action="" method="post">
+        
+    </form>
     
 </body>
 </html>

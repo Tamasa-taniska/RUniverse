@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* view-marks.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.left-img {
+    height: 100px;
+    margin-left: 50px ;
+}
+
+.header-text {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: rgb(177, 19, 19);
+}
+
+#marks-content {
+    width: 80%;
+    margin: auto; /* Centers the content */
+    padding: 20px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.marks-table th, .marks-table td {
+    border: 1px solid #0000;
+    padding: 12px;
+    text-align: center;
+}
+
+.marks-table th {
+    background-color: rgb(177, 19, 19);
+    color: #fff;
+    font-size: 16px;
+}
+
+.marks-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button {
+    display: inline-block;
+    background: rgb(177, 19, 19);
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: rgb(140, 10, 10);
+}
+
+@media print {
+    button {
+        display: none;
+    }
+}
+
+/* .student-image {
+    text-align:right;
+    margin-bottom: 20px;
+}
+
+.student-photo {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit:contain;
+} */
+
+.student-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+}
+
+.student-photo {
+    border-radius: 5%;
+    width: 10px;
+    height: 10px;
+    object-fit: cover;
+    border: 2px solid #333;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+

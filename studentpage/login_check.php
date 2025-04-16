@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($role == "students") {
             header("location: profile.php");
         } elseif ($role == "admin") {
-            header("location: adminhome.html");
+            header("location: ../adminpage/adminhome.php");
         } elseif ($role == "faculty") {
             header("location: facultyhome.php");
         }
