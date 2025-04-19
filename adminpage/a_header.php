@@ -62,7 +62,7 @@ if (!$info) {
                 <li><a href="/ravenshaw/adminpage/studentAction.html">Student Management</a></li>
                 <li><a href="faculty_management.php">Faculty Management</a></li>
                 <li><a href="subject_entry.php">Subject Entry</a></li>
-                <li><a href="notice_management.php">Notice Management</a></li>
+                <li><a href="/ravenshaw/adminpage/notice_sender.php">Notice Management</a></li>
                 <li><a href="../adminpage/admin/upload-marks.php">Publish Results</a></li>
                 <li><a href="admin_registration.php">Add Admin</a></li>
             </ul>
