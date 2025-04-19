@@ -49,10 +49,10 @@ if (!$info) {
         </div> 
         <nav class="navbar">
             <ul>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="notes.html">Notes</a></li>
-                <li><a href="inbox.html">Inbox</a></li>
-                <li><a href="compose.html">Compose</a></li>
+                <li><a href="/ravenshaw/studentpage/profile.php">Profile</a></li>
+                <li><a href="/ravenshaw/studentpage/notes.html">Notes</a></li>
+                <li><a href="/ravenshaw/studentpage/inbox.html">Inbox</a></li>
+                <li><a href="/ravenshaw/studentpage/compose.html">Compose</a></li>
                 <li class="dropdown">
                     <a href="#">Scorecard</a>
                     <ul class="dropdown-content">
@@ -60,7 +60,8 @@ if (!$info) {
                         <li><a href="/ravenshaw/adminpage/student/view-marks.php">Semester</a></li>
                     </ul>
                 </li>
-                <li><a href="notice.html">Notice</a></li>
+                <!-- <li><a href="notice.html">Notice</a></li> -->
+                <li><a href="/ravenshaw/studentpage/student-notice.php">Notice</a></li>
                 <li class="dropdown">
                     <a href="#">Examination</a>
                     <ul class="dropdown-content">
@@ -70,8 +71,8 @@ if (!$info) {
                         <li><a href="#">Recheck</a></li>
                     </ul>
                 </li>
-                <li><a href="anti-ragging.html">Anti Ragging Cell</a></li>
-                <li><a href="../tru_main/self_assesment/counsellor.html">Talk to Counsellor</a></li>
+                <li><a href="/ravenshaw/studentpage/anti-ragging.html">Anti Ragging Cell</a></li>
+                <li><a href="/ravenshaw/studentpage/self_assesment/counsellor.html">Talk to Counsellor</a></li>
             </ul>
         </nav>
 

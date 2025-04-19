@@ -19,6 +19,15 @@ if ($result->num_rows > 0) {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="header-placeholder"></div>
+    <script>
+        // Load the header content from header.php
+        fetch('../a_header.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            });
+    </script>
   <div class="container">
     <h1>Student Registration Form</h1>
     <form id="registrationForm" action="register.php" method="POST">
