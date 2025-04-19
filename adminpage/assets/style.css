@@ -85,19 +85,19 @@ button:hover {
     }
 }
 
-/* .student-image {
+.student-image {
     text-align:right;
     margin-bottom: 20px;
 }
 
 .student-photo {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     object-fit:contain;
-} */
+} 
 
-.student-image {
+/* .student-image {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -111,5 +111,5 @@ button:hover {
     object-fit: cover;
     border: 2px solid #333;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
+} */
 

@@ -52,8 +52,8 @@
 session_start();
 $host = "localhost";
 $user = "root";
-$password = "@ashu2003";
-$db = "runiverse";
+$password = "MySQL@2025";
+$db = "ru";
 
 // Create database connection
 $data = new mysqli($host, $user, $password, $db);

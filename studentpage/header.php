@@ -69,7 +69,7 @@ if (!$info) {
                     </ul>
                 </li>
                 <li><a href="anti-ragging.html">Anti Ragging Cell</a></li>
-                <li><a href="../tru_main/self_assesment/counsellor.html">Talk to Counsellor</a></li>
+                <li><a href="../studentpage/self_assesment/counsellor.html">Talk to Counsellor</a></li>
             </ul>
         </nav>
 
