@@ -10,7 +10,7 @@
     <div id="header-placeholder"></div>
     <script>
         // Load the header content from header.html
-        fetch('../header.php')
+        fetch('header.php')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;

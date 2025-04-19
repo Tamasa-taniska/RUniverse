@@ -70,8 +70,8 @@ if (!$info) {
                         <li><a href="#">Recheck</a></li>
                     </ul>
                 </li>
-                <li><a href="/ravenshaw/studentpage/anti-ragging.html">Anti Ragging Cell</a></li>
-                <li><a href="/ravenshaw/studentpage/self_assesment/counsellor.html">Talk to Counsellor</a></li>
+                <li><a href="anti-ragging.html">Anti Ragging Cell</a></li>
+                <li><a href="../tru_main/self_assesment/counsellor.html">Talk to Counsellor</a></li>
             </ul>
         </nav>
 
