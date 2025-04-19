@@ -63,7 +63,7 @@ if (!$info) {
     .then(response => response.text())
     .then(data => {
         document.getElementById('header-placeholder').innerHTML = data;
-        
+</script>
         // Re-select logoutButton after header is loaded
         const logoutButton = document.getElementById("logoutButton");
         if (logoutButton) {
