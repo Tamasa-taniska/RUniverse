@@ -46,7 +46,7 @@ if ($photoRow['photo'] == 1) {
     }}
 
 ?>
-
+<!--  -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +54,17 @@ if ($photoRow['photo'] == 1) {
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-<div id="marks-content">
+<div id="header-placeholder"></div>
+    <script>
+        // Load the header content from header.php
+        fetch('/ravenshaw/studentpage/header.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            });
+    </script>
+    <div class="profile-container">
+        <div id="marks-content">
 <div class="header">
     <img class="left-img" src="../assets/logo.png" alt="College Logo">
     <div class="header-text">
@@ -139,7 +149,8 @@ if (isset($_POST['semester'])) {
 }
 ?>
 <button onclick="downloadPDF()">📥 Download as PDF</button>
-</div>
+</div></div>
+
 
 
 

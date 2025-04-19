@@ -24,12 +24,14 @@ if (!$info) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
-    <link rel="stylesheet" href="header.css">
+    <!-- <link rel="stylesheet" href="header.css"> -->
+    <link rel="stylesheet" href="/ravenshaw/studentpage/header.css">
+
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <img src="logo.jpeg" alt="Logo" class="logo">
+            <img src="/ravenshaw/studentpage/logo.jpeg" alt="Logo" class="logo">
         </div>
         <div class="info-container">
             <div class="student-info">
@@ -68,8 +70,8 @@ if (!$info) {
                         <li><a href="#">Recheck</a></li>
                     </ul>
                 </li>
-                <li><a href="anti-ragging.html">Anti Ragging Cell</a></li>
-                <li><a href="../tru_main/self_assesment/counsellor.html">Talk to Counsellor</a></li>
+                <li><a href="/ravenshaw/studentpage/anti-ragging.html">Anti Ragging Cell</a></li>
+                <li><a href="/ravenshaw/studentpage/self_assesment/counsellor.html">Talk to Counsellor</a></li>
             </ul>
         </nav>
 
