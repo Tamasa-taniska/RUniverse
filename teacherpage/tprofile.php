@@ -97,61 +97,78 @@ if (!$info) {
         <div class="profile-info"><b>District:</b> <?php echo htmlspecialchars($info['City']); ?></div>
         <div class="profile-info"><b>State:</b> <?php echo htmlspecialchars($info['State']); ?></div>
         <div class="profile-info"><b>Pincode:</b> <?php echo htmlspecialchars($info['pincode']); ?></div>
-
         <button class="edit-button" onclick="editProfile()">Edit Profile</button>
     </div>
 </div>
 
-<!-- Edit Form -->
+<!-- Edit form -->
 <div id="edit-form" style="display: none;">
-    <div class="container">
-        <div class="profile-photo">
-            <img src="profile.jpg" alt="Faculty Photo" id="edit-photo" class="profile-photo">
-        </div>
-        <div class="profile-infos">
-            <h3>Edit Profile</h3>
-            <div class="edit-form">
-                <label>Name:</label>
-                <input type="text" id="edit-name" value="<?php echo htmlspecialchars($info['first_name'] . " " . $info['last_name']); ?>"> 
-            </div>
-            <div class="edit-form">
-                <label>Mobile Number:</label>
-                <input type="text" id="edit-mobile" value="<?php echo htmlspecialchars($info['phone_number']); ?>">
-            </div>
-            <div class="edit-form">
-                <label>Date of Birth:</label>
-                <input type="text" id="edit-DOB" value="<?php echo htmlspecialchars($info['DOB']); ?>">
-            </div>
-            <div class="edit-form">
-                <label>Email:</label>
-                <input type="email" id="edit-email" value="<?php echo htmlspecialchars($info['email']); ?>">
-            </div>
-            <div class="edit-form">
-                <label>Position:</label>
-                <input type="text" id="edit-position" value="<?php echo htmlspecialchars($info['designation']); ?>">
-            </div>
-            <div class="edit-form">
-                <label>Address:</label>
-                <textarea id="edit-address"><?php echo htmlspecialchars($info['House_No_Building_Name']); ?></textarea>
-            </div>
-            <div class="edit-form">
-                <label>District:</label>
-                <input type="text" id="edit-district" value="<?php echo htmlspecialchars($info['City']); ?>">
-            </div>
-            <div class="edit-form">
-                <label>State:</label>
-                <input type="text" id="edit-state" value="<?php echo htmlspecialchars($info['State']); ?>">
-            </div>
-            <div class="edit-form">
-                <label>Pincode:</label>
-                <input type="text" id="edit-pincode" value="<?php echo htmlspecialchars($info['pincode']); ?>">
-            </div>
+<form action="tupdate_profile.php" method="POST" enctype="multipart/form-data">
 
-            <button class="save-button">Save Changes</button>
-            <button class="cancel-button" onclick="cancelEdit()">Cancel</button>
-        </div>
+    <!-- Only include fields allowed to be updated -->
+
+    <div class="edit-form">
+        <label>Mobile Number:</label>
+        <input type="text" name="phone_number" value="<?php echo htmlspecialchars($info['phone_number']);?>">
     </div>
+
+    <div class="edit-form">
+        <label>Address:</label>
+        <textarea name="address"><?php echo htmlspecialchars($info['House_No_Building_Name']);?></textarea>
+    </div>
+
+    <div class="edit-form">
+        <label>Pincode:</label>
+        <input type="text" name="pincode" value="<?php echo htmlspecialchars($info['pincode']);?>">
+    </div>
+
+    <div class="edit-form">
+        <label>District:</label>
+        <input type="text" name="district" value="<?php echo htmlspecialchars($info['City']);?>">
+    </div>
+
+    <div class="edit-form">
+        <label>State:</label>
+        <input type="text" name="state" value="<?php echo htmlspecialchars($info['State']);?>">
+    </div>
+
+    <div class="edit-form">
+        <label>Change Photo:</label>
+        <input type="file" name="photo" accept="image">
+    </div>
+
+    <button class="save-button" type="submit">Save Changes</button>
+    <button class="cancel-button" type="button" onclick="cancelEdit()">Cancel</button>
+</form>
+
+    
 </div>
+
+<script>
+function editProfile() {
+    document.getElementById("edit-form").style.display = "block";
+    document.querySelector(".container").style.display = "none"; // Hide view mode
+}
+
+function cancelEdit() {
+    document.getElementById("edit-form").style.display = "none";
+    document.querySelector(".container").style.display = "flex"; // Show view mode
+}
+
+function updatePhoto() {
+    const fileInput = document.getElementById("upload");
+    const photo = document.getElementById("profile-photo");
+
+    const file = fileInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            photo.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
 
 </body>
 </html>

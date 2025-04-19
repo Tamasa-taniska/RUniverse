@@ -1,18 +1,17 @@
 <?php
 session_start();
-include 'dbconnect.php';
-
-if (!isset($_SESSION['faculty'])) {
-    header("Location: index1.php");
+if (!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role'] !== "faculty") {
+    session_destroy();
+    header("location: /ravenshaw/studentpage/login.php");
     exit();
 }
+include '../studentpage/dbconnect.php';
 
-$faculty = $_SESSION['faculty'];
-$my_email = $faculty['email'];
+$user_email = $_SESSION['email'];
 
 $stmt = $data->prepare("SELECT m.*, t.name, t.designation 
-                        FROM messages m
-                        JOIN teacher t ON m.sender_email = t.email
+                        FROM compose-inbox m
+                        JOIN faculty t ON m.sender_email = t.email
                         WHERE m.receiver_email = ?
                         ORDER BY m.timestamp DESC");
 $stmt->bind_param("s", $my_email);

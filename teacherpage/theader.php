@@ -169,7 +169,7 @@ button:hover {
 <body>
     <header>
         <div class="logo-container">
-            <img src="logo.jpeg" alt="Logo" class="logo">
+            <img src="/ravenshaw/studentpage/logo.jpeg" alt="Logo" class="logo">
         </div>
         <div class="info-container">
         <div class="student-info">
@@ -178,7 +178,7 @@ button:hover {
        </div>
 
             <div class="actions">
-                <form method="POST" action="logout.php">
+                <form method="POST" action="../studentpage/logout.php">
                     <button type="submit" id="logoutButton">Logout</button>
                 </form>
             </div>
@@ -189,8 +189,8 @@ button:hover {
                 <li class="dropdown">
                     <a href="#">Messages</a>
                     <ul class="dropdown-content">
-                        <li><a href="tinbox.html">Inbox</a></li>
-                        <li><a href="tcompose.html" onclick="compose()">Compose</a></li>
+                        <li><a href="temp.php">Inbox</a></li>
+                        <li><a href="tcompose.php">Compose</a></li>
                         <li><a href="tnotice.html">Notice</a></li>
                     </ul>
                 </li>
