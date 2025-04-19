@@ -11,7 +11,7 @@ $email = $_SESSION['email'];
 
 // Fetch user details from `users` table
 $sql = "SELECT u.user_id, u.first_name, u.last_name, u.role, u.State, u.City, u.pincode, u.House_No_Building_Name, u.Road_Name_Area_Colony, 
-               f.designation, f.email, f.DOB, f.phone_number, f.photo
+               f.designation, f.email, f.DOB, f.phone_number, f.photo, f.faculty_id
         FROM users u 
         LEFT JOIN faculty f ON u.user_id = f.faculty_id
         WHERE f.email = ?";
@@ -57,25 +57,28 @@ if (!$info) {
 </head>
 <body>
 <div id="header-placeholder"></div>
-    <script>
-        // Load the header content from header.html
-        fetch('theader.php')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
+<script>
+    // Load the header content from theader.php
+    fetch('theader.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            
+            // Now look for the logout button INSIDE this then block
+            const logoutButton = document.getElementById("logoutButton");
+            if (logoutButton) {
+                logoutButton.addEventListener("click", function () {
+                    window.location.href = "/ravenshaw/studentpage/logout.php";
+                });
+                console.log("Logout button event listener added.");
+            } else {
+                console.error("Logout button not found!");
+            }
+        })
+        .catch(error => {
+            console.error('Error loading header:', error);
+        });
 </script>
-        // Re-select logoutButton after header is loaded
-        const logoutButton = document.getElementById("logoutButton");
-        if (logoutButton) {
-            logoutButton.addEventListener("click", function () {
-                window.location.href = "/ravenshaw/studentpage/logout.php";
-            });
-            console.log("Logout button event listener added.");
-        } else {
-            console.error("Logout button not found!");
-        }
-    });
-
 <div class="container">
     <div class="profile-photo">
         <img src="profile.jpg" alt="Faculty Photo" id="profile-photo">
@@ -149,9 +152,6 @@ if (!$info) {
         </div>
     </div>
 </div>
-<p style="text-align: right; margin: 10px;">
-    <a href="logout.php" style="text-decoration: none; color: #fff; background-color: #f44336; padding: 5px 10px; border-radius: 5px;">Logout</a>
-</p>
 
 </body>
 </html>
