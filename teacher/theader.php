@@ -1,52 +1,15 @@
+
 <?php
-session_start();
-if (!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role'] !== "faculty") {
-    session_destroy();
-    header("location: /ravenshaw/studentpage/login.php");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['faculty'])) {
+    header("Location: index1.php");
     exit();
 }
-include '../studentpage/dbconnect.php';
-
-$email = $_SESSION['email'];
-
-// Fetch user details from `users` table
-$sql = "SELECT u.user_id, u.first_name, u.last_name, u.role, u.State, u.City, u.pincode, u.House_No_Building_Name, u.Road_Name_Area_Colony, 
-               f.designation, f.email, f.DOB, f.phone_number, f.photo, f.faculty_id
-        FROM users u 
-        LEFT JOIN faculty f ON u.user_id = f.faculty_id
-        WHERE f.email = ?";
-        
-$stmt = $data->prepare($sql);
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$info = $result->fetch_assoc();
-$username= $info["first_name"];
-$userid= $info["user_id"];
-// $imgpath= 'profile'.$userid;
-
-$imgpath = "uploads/default_photo.jpg"; // Default image path
-$photoCheck = $data->query("SELECT photo FROM faculty WHERE faculty_id = '$userid'");
-$photoRow = $photoCheck->fetch_assoc();
-
-if ($photoRow['photo'] == 1) {
-    $jpgPath = "uploads/profile" . $userid . ".jpg";
-    $pngPath = "uploads/profile" . $userid . ".png";
-    
-    if (file_exists($jpgPath)) {
-        $imgpath = $jpgPath;
-    } elseif (file_exists($pngPath)) {
-        $imgpath = $pngPath;
-    }
-}
-
-
-if (!$info) {
-    die("Error: No faculty data found for this email.");
-}
-
+$faculty = $_SESSION['faculty'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -173,8 +136,8 @@ button:hover {
         </div>
         <div class="info-container">
         <div class="student-info">
-           <p>Name: <?php echo htmlspecialchars($info['first_name'] . " " . $info['last_name']); ?></p>
-           <p>Teacher ID: <?php echo htmlspecialchars($info['faculty_id']); ?></p>
+           <p>Name: <?php echo htmlspecialchars($faculty['name']); ?></p>
+           <p>Teacher ID: <?php echo htmlspecialchars($faculty['faculty_id']); ?></p>
        </div>
 
             <div class="actions">
@@ -185,12 +148,12 @@ button:hover {
         </div> 
         <nav class="navbar">
             <ul>
-                <li><a href="tprofile.php">Profile</a></li>
+                <li><a href="tprofile.html">Profile</a></li>
                 <li class="dropdown">
                     <a href="#">Messages</a>
                     <ul class="dropdown-content">
-                        <li><a href="tinbox.html">Inbox</a></li>
-                        <li><a href="tcompose.html" onclick="compose()">Compose</a></li>
+                        <li><a href="t_inbox.php">Inbox</a></li>
+                        <li><a href="tcompose.php" onclick="compose()">Compose</a></li>
                         <li><a href="tnotice.html">Notice</a></li>
                     </ul>
                 </li>
@@ -198,8 +161,8 @@ button:hover {
                 <li class="dropdown">
                     <a href="#">Courses</a>
                     <ul class="dropdown-content">
-                        <li><a href="#">Syllabus</a></li>
-                        <li><a href="#" onclick="studymaterials()">Study materials</a></li>
+                        <li><a href="subject_assigned.php">Subject assigned</a></li>
+                        <li><a href="StudyMaterials.php" onclick="studymaterials()">Study materials</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -218,3 +181,4 @@ button:hover {
     </header>
 </body>
 </html>
+

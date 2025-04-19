@@ -16,6 +16,7 @@ session_start();
             <!-- <form action="#"> -->
       <!-- <label for="lang"></label> -->
       <select name="USER" id="lang">
+      <option value="">--Select--</option>
         <option value="admin">ADMIN</option>
         <option value="faculty">FACULTY</option>
         <option value="students">STUDENT</option>
@@ -23,27 +24,14 @@ session_start();
         <!-- </form> -->
     </h2>
 
+        
         <h4>
-            <?php 
-
-            //error_reporting(0);
-        //     session_start();
-        //     session_destroy();
-    
-        // echo $_SESSION['loginMessage'];
-    
-
-            ?>
-
-        </h4>
-<h4>
-  <?php 
+    <?php 
     if (isset($_SESSION['loginMessage'])) {
-    echo "<div style='color: red; background: #ffe0e0; padding: 10px; border: 1px solid red; border-radius: 5px; margin-top: 10px;'>".$_SESSION['loginMessage']."</div>";
-    unset($_SESSION['loginMessage']);
+        echo $_SESSION['loginMessage'];
+        unset($_SESSION['loginMessage']); // Remove message after displaying
     }
-  ?>
-
+    ?>
 </h4>
 
 
@@ -55,15 +43,9 @@ session_start();
             <button type="submit">Login</button>
             <!-- <p id="errorMessage" class="error-message"></p> -->
             <!-- <p><a href="#" id="forgotPassword">Forgot Password?</a></p> -->
-            <p><a href="forgot_password.php" id="forgotPassword" name="forgotpassword" >Forgot Password?</a></p>
+            <p><a href="update_password.php" id="forgotPassword" name="forgotpassword" >Forgot Password?</a></p>
         </form>
     </div>
-    <?php
-if (isset($error)) {
-    echo "<p style='color: red; background: #ffe0e0; padding: 10px; border: 1px solid red; border-radius: 5px; margin-top: 10px;'>$error</p>";
-}
-?>
-
     <!-- <script src="scripts.js"></script> -->
 </body>
 </html>

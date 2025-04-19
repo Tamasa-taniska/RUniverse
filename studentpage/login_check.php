@@ -52,8 +52,8 @@
 session_start();
 $host = "localhost";
 $user = "root";
-$password = "@ashu2003";
-$db = "runiverse";
+$password = "MySQL@2025";
+$db = "ru";
 
 // Create database connection
 $data = new mysqli($host, $user, $password, $db);
@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($role == "admin") {
             header("location: ../adminpage/adminhome.php");
         } elseif ($role == "faculty") {
-            header("location: facultyhome.php");
+            header("location: ../teacherpage/tprofile.php");
         }
         exit();
     } else {

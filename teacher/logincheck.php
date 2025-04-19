@@ -44,7 +44,7 @@ if ($userType === "faculty") {
 //         header("Location: index1.php");
 //         exit();
 //     }
-}
+
 
 else {
     $_SESSION['loginMessage'] = "Only 'faculty' login is implemented right now.";
