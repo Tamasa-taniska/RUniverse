@@ -1,127 +1,170 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
     margin: 0;
     min-height: 100vh;
-    position: relative;
-}
-.profile-container {
-    width: 100%;
-    margin: 0;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-/* view-marks.css */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.left-img {
-    height: 100px;
-    margin-left: 50px ;
-}
-
-.header-text {
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    color: rgb(177, 19, 19);
 }
 
 #marks-content {
-    width: 80%;
-    margin: auto; /* Centers the content */
-    padding: 20px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.header-container {
     text-align: center;
+    margin-bottom: 30px;
+}
+
+.university-header {
+    margin-bottom: 25px;
+}
+
+.university-logo {
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.header-info h1 {
+    color: #b11313;
+    font-size: 28px;
+    margin: 5px 0;
+}
+
+.header-info h2 {
+    font-size: 22px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.header-info p {
+    font-size: 18px;
+    margin: 8px 0;
+    color: #444;
+}
+
+.student-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 25px;
+}
+
+.student-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #b11313;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.student-info h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.student-info h4 {
+    font-size: 18px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.semester-selector {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.semester-selector select {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
 }
 
 .marks-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 25px 0;
+    background: white;
 }
 
-.marks-table th, .marks-table td {
-    border: 1px solid #0000;
-    padding: 12px;
+.marks-table th,
+.marks-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
     text-align: center;
 }
 
 .marks-table th {
-    background-color: rgb(177, 19, 19);
-    color: #fff;
-    font-size: 16px;
+    background-color: #b11313;
+    color: white;
+    font-weight: bold;
 }
 
 .marks-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
+}
+
+.sgpa-row {
+    background-color: #ffe6e6;
+    font-weight: bold;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 30px;
 }
 
 button {
-    display: inline-block;
-    background: rgb(177, 19, 19);
-    color: #fff;
+    background: #b11313;
+    color: white;
     border: none;
-    padding: 12px 18px;
-    font-size: 16px;
-    border-radius: 10px;
+    padding: 12px 25px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
-    margin-top: 20px;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background: rgb(140, 10, 10);
+    background: #900e0e;
+}
+
+.no-marks {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin: 30px 0;
 }
 
 @media print {
-    button {
-        display: none;
+    .no-print {
+        display: none !important;
+    }
+    
+    #marks-content {
+        box-shadow: none;
+        padding: 10px;
+    }
+    
+    .student-photo {
+        border-width: 2px;
+    }
+    
+    .marks-table th {
+        background-color: #b11313 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .marks-table td,
+    .marks-table th {
+        border-color: #000 !important;
     }
 }
-
-.student-image {
-    text-align:right;
-    margin-bottom: 20px;
-}
-
-.student-photo {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit:contain;
-} 
-
-/* .student-image {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    text-align: center;
-}
-
-.student-photo {
-    border-radius: 5%;
-    width: 10px;
-    height: 10px;
-    object-fit: cover;
-    border: 2px solid #333;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-} */
-
