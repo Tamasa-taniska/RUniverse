@@ -6,61 +6,122 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role']
     exit();
 }
 include '../studentpage/dbconnect.php';
+$currentEmail = $_SESSION['email']; 
 
-$email = $_SESSION['email'];
+// Get designation of the logged-in faculty
+$designationQuery = "SELECT designation FROM faculty WHERE email = '$currentEmail'";
+$designationResult = mysqli_query($data, $designationQuery);
 
-// First check if user is HOD
-$hod_check = $data->prepare("SELECT designation FROM faculty WHERE email = ?");
-$hod_check->bind_param("s", $email);
-$hod_check->execute();
-$designation_result = $hod_check->get_result()->fetch_assoc();
-$is_hod = (strpos($designation_result['designation'] ?? '', '(HOD)') !== false);
+if (!$designationResult || mysqli_num_rows($designationResult) === 0) {
+    echo "Designation not found for the current user.";
+    exit;
+}
 
-// Then fetch messages
-$stmt = $data->prepare("SELECT m.*, 
-                        CONCAT(u.first_name, ' ', u.last_name) AS name, 
-                        f.designation
-                        FROM `compose_inbox` m
-                        LEFT JOIN faculty f ON m.sender_email = f.email
-                        LEFT JOIN users u ON f.faculty_id = u.user_id
-                        WHERE (m.receiver_email = ? OR m.receiver_email = 'all_faculty')
-                        AND m.sender_email != ?");
+$designationRow = mysqli_fetch_assoc($designationResult);
+$designation = $designationRow['designation'];
 
-$stmt->bind_param("ss", $email, $email);
-$stmt->execute();
-$result = $stmt->get_result();
+// Decide inbox query based on designation
+if (strpos($designation, '(HOD)') !== false) {
+    // HOD: Can see messages from admin and other faculty
+    $inboxQuery = "SELECT * FROM compose_inbox 
+                   WHERE receiver_email IN ('$currentEmail', 'all_faculty')
+                   AND sender_email != '$currentEmail'
+                   ORDER BY timestamp DESC";
+} else {
+    // Non-HOD: Can see messages only from admin
+    $inboxQuery = "SELECT * FROM compose_inbox 
+                   WHERE receiver_email IN ('$currentEmail', 'all_faculty')
+                   AND sender_email != '$currentEmail'
+                   AND sender_email LIKE '%admin%'
+                   ORDER BY timestamp DESC";
+}
+
+$inboxResult = mysqli_query($data, $inboxQuery);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Inbox</title>
-    <link rel="stylesheet" href="t_inbox.css">
+    <title>Faculty Inbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #a72222cc;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .no-message {
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
-<?php include("theader.php"); ?>
-<div class="inbox-container">
-    <h2><?php echo $is_hod ? 'HOD Inbox' : 'Inbox'; ?></h2>
-    <?php if ($result->num_rows > 0): ?>
-        <?php while ($msg = $result->fetch_assoc()): ?>
-            <div class="message">
-                <div class="message-header">
-                    <span class="sender">
-                        <?php echo htmlspecialchars($msg['name']) . " (" . htmlspecialchars($msg['designation']) . ")"; ?>
-                    </span>
-                    <span class="timestamp"><?php echo $msg['timestamp']; ?></span>
-                </div>
-                <div class="subject"><?php echo htmlspecialchars($msg['subject']); ?></div>
-                <div class="message-body"><?php echo nl2br(htmlspecialchars($msg['message'])); ?></div>
-                <?php if ($msg['receiver_email'] === 'all_faculty'): ?>
-                    <div class="broadcast-flag">(Broadcast to all faculty)</div>
-                <?php endif; ?>
-            </div>
+<div id="header-placeholder"></div>
+<script>
+    // Load the header content from theader.php
+    fetch('theader.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            
+            // Now look for the logout button INSIDE this then block
+            const logoutButton = document.getElementById("logoutButton");
+            if (logoutButton) {
+                logoutButton.addEventListener("click", function () {
+                    window.location.href = "/ravenshaw/studentpage/logout.php";
+                });
+                console.log("Logout button event listener added.");
+            } else {
+                console.error("Logout button not found!");
+            }
+        })
+        .catch(error => {
+            console.error('Error loading header:', error);
+        });
+</script>
+<h2>Inbox for <?= htmlspecialchars($currentEmail); ?></h2>
+
+<?php if (mysqli_num_rows($inboxResult) > 0): ?>
+    <table>
+        <tr>
+            <th>From</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Time</th>
+        </tr>
+        <?php while($msg = mysqli_fetch_assoc($inboxResult)): ?>
+            <tr>
+                <td><?= htmlspecialchars($msg['sender_email']); ?></td>
+                <td><?= htmlspecialchars($msg['subject']); ?></td>
+                <td><?= nl2br(htmlspecialchars($msg['message'])); ?></td>
+                <td><?= htmlspecialchars($msg['timestamp']); ?></td>
+            </tr>
         <?php endwhile; ?>
-    <?php else: ?>
-        <p>No messages found.</p>
-    <?php endif; ?>
-</div>
+    </table>
+<?php else: ?>
+    <p class="no-message">No messages to show.</p>
+<?php endif; ?>
+
 </body>
 </html>

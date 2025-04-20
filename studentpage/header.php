@@ -51,8 +51,8 @@ if (!$info) {
             <ul>
                 <li><a href="/ravenshaw/studentpage/profile.php">Profile</a></li>
                 <li><a href="/ravenshaw/studentpage/notes.html">Notes</a></li>
-                <li><a href="/ravenshaw/studentpage/inbox.html">Inbox</a></li>
-                <li><a href="/ravenshaw/studentpage/compose.html">Compose</a></li>
+                <li><a href="/ravenshaw/studentpage/inbox.php">Inbox</a></li>
+                <li><a href="/ravenshaw/studentpage/compose.php">Compose</a></li>
                 <li class="dropdown">
                     <a href="#">Scorecard</a>
                     <ul class="dropdown-content">

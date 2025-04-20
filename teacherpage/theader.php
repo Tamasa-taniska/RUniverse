@@ -189,9 +189,9 @@ button:hover {
                 <li class="dropdown">
                     <a href="#">Messages</a>
                     <ul class="dropdown-content">
-                        <li><a href="temp.php">Inbox</a></li>
+                        <li><a href="t_inbox.php">Inbox</a></li>
                         <li><a href="tcompose.php">Compose</a></li>
-                        <li><a href="tnotice.html">Notice</a></li>
+                        <li><a href="tnotice.php">Notice</a></li>
                     </ul>
                 </li>
                 <li><a href="tinternal.php">Scorecard</a></li>

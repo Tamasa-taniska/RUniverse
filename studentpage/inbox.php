@@ -1,3 +1,40 @@
+<?php
+session_start();
+
+// Check if the user is logged in and has the correct role
+if (!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role'] !== "students") {
+    session_destroy();
+    header("location: login.php");
+    exit();
+}
+
+include 'dbconnect.php';
+
+$email = $_SESSION['email'];
+
+// Fetch user details from `users` table
+$sql = "SELECT u.user_id, u.first_name, u.last_name, u.role, u.State, u.City, u.pincode, u.House_No_Building_Name, u.Road_Name_Area_Colony, 
+               s.roll_number, s.email, s.dob, s.status, s.phone_number, s.blood_group, s.semester, s.photo
+        FROM users u 
+        LEFT JOIN students s ON u.user_id = s.student_id
+        WHERE s.email = ?";
+
+$stmt = $data->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$info = $result->fetch_assoc();
+
+if (!$info) {
+    die("Error: No student data found for this email.");
+}
+
+// Store semester ID in session
+$_SESSION['semester_id'] = $info['semester'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,39 +61,6 @@
             color: #bc0a0a;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        label {
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
-
-        input {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 80%;
-        }
-
-        .btn-fetch {
-            background-color: #bc0a0a;
-            color: white;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            padding: 10px 20px;
-            border-radius: 4px;
-        }
-
-        .btn-fetch:hover {
-            background-color: #bc0a0a;
-        }
-
         .message-item {
             background-color: #f9fff7;
             padding: 10px;
@@ -80,7 +84,7 @@
     <div id="header-placeholder"></div>
 
     <script>
-        // Load the header content from header.html
+        // Load the header content from header.php
         fetch('header.php')
             .then(response => response.text())
             .then(data => {
@@ -89,17 +93,21 @@
     </script>
     <div class="container">
         <h1>Inbox</h1>
-        <form id="fetchForm">
-            <label for="semester_id">Enter Semester:</label>
-            <input type="number" id="semester_id" name="semester_id" required>
-            <button type="button" onclick="fetchMessages()" class="btn-fetch">Fetch Messages</button>
-        </form>
         <div id="messages"></div>
     </div>
     <script>
-        function fetchMessages() {
-            const semester_id = document.getElementById("semester_id").value;
+        // Automatically fetch messages using the semester ID from the session
+        document.addEventListener("DOMContentLoaded", function() {
+            const semester_id = <?php echo json_encode($_SESSION['semester_id']); ?>; // Get semester ID from session
 
+            if (semester_id) {
+                fetchMessages(semester_id);
+            } else {
+                document.getElementById("messages").innerHTML = "<p>No semester ID found.</p>";
+            }
+        });
+
+        function fetchMessages(semester_id) {
             fetch(`fetch.php?semester_id=${semester_id}`)
                 .then(response => response.json())
                 .then(data => {

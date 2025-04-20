@@ -46,7 +46,7 @@ if ($photoRow['photo'] == 1) {
     }}
 
 ?>
-<!--  -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,6 +54,7 @@ if ($photoRow['photo'] == 1) {
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="profile-container">
 <div id="header-placeholder"></div>
     <script>
         // Load the header content from header.php
@@ -63,7 +64,7 @@ if ($photoRow['photo'] == 1) {
                 document.getElementById('header-placeholder').innerHTML = data;
             });
     </script>
-    <div class="profile-container">
+    
         <div id="marks-content">
 <div class="header">
     <img class="left-img" src="../assets/logo.png" alt="College Logo">
