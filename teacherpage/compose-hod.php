@@ -1,38 +1,29 @@
 <?php
 session_start();
-if (!isset($_SESSION['email']) || !isset($_SESSION['role'])) {
+if (!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role'] !== "faculty") {
     session_destroy();
     header("location: /ravenshaw/studentpage/login.php");
     exit();
 }
+$email = $_SESSION['email'];
 
 include '../studentpage/dbconnect.php';
 
-// Check if the user's designation is "HOD"
-$hod_check_query = $data->prepare("SELECT designation FROM faculty WHERE email = ?");
-$hod_check_query->bind_param("s", $_SESSION['email']);
-$hod_check_query->execute();
-$hod_check_result = $hod_check_query->get_result();
-$hod_check = $hod_check_result->fetch_assoc();
+// Get the admin's email
+$admin_query = $data->prepare("
+    SELECT a.email 
+    FROM admin a 
+    JOIN users u ON a.admin_id = u.user_id 
+");
+$admin_query->execute();
+$admin_result = $admin_query->get_result();
+$admin = $admin_result->fetch_assoc();
 
-if ($hod_check && strpos($hod_check['designation'], '(HOD)') !== false) {
-    // Redirect HODs to compose-hod.php
-    header("Location: compose-hod.php");
-    exit();
+if (!$admin) {
+    die("Admin not found in the system.");
 }
 
-
-// Get the HOD's email for faculty users
-$hod_query = $data->prepare("SELECT email FROM faculty WHERE designation LIKE '%(HOD)%'");
-$hod_query->execute();
-$hod_result = $hod_query->get_result();
-$hod = $hod_result->fetch_assoc();
-
-if (!$hod) {
-    die("HOD not found in the system.");
-}
-
-$hod_email = $hod['email']; // HOD's email
+$admin_email = $admin['email']; // Admin's email
 $error = "";
 $success = "";
 
@@ -42,14 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $message = $_POST['message'];
     $sender_email = $_SESSION['email'];
 
-    // Insert into inbox (receiver is always HOD)
+    // Insert into inbox (receiver is always Admin)
     $stmt = $data->prepare("INSERT INTO `compose-inbox` 
         (sender_email, receiver_email, subject, message) 
         VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $sender_email, $hod_email, $subject, $message);
+    $stmt->bind_param("ssss", $sender_email, $admin_email, $subject, $message);
     
     if ($stmt->execute()) {
-        $success = "Message sent to HOD.";
+        $success = "Message sent to Admin.";
     } else {
         $error = "Failed to send message.";
     }
@@ -58,13 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Compose Message to HOD</title>
+    <title>Compose Message to Admin</title>
     <link rel="stylesheet" href="tcompose.css">
 </head>
 <body>
 <?php include("theader.php"); ?>
 <div class="container">
-    <h1>Compose Message to HOD</h1>
+    <h1>Compose Message to Admin</h1>
     <?php if ($error) echo "<p style='color:red;'>$error</p>"; ?>
     <?php if ($success) echo "<p style='color:green;'>$success</p>"; ?>
     <form method="POST">
@@ -73,8 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="email" value="<?php echo $_SESSION['email']; ?>" disabled>
         </div>
         <div class="form-group">
-            <label>To (HOD):</label>
-            <input type="email" value="<?php echo $hod_email; ?>" disabled> 
+            <label>To (Admin):</label>
+            <input type="email" value="<?php echo $admin_email; ?>" disabled> 
         </div>
         <div class="form-group">
             <label>Subject:</label>

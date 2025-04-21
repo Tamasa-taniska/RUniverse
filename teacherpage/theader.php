@@ -198,7 +198,7 @@ button:hover {
                 <li class="dropdown">
                     <a href="#">Courses</a>
                     <ul class="dropdown-content">
-                        <li><a href="#">Syllabus</a></li>
+                        <li><a href="subject_assigned.php">Subjects Assigned</a></li>
                         <li><a href="StudyMaterial.php">Study materials</a></li>
                     </ul>
                 </li>
