@@ -194,7 +194,7 @@ button:hover {
                         <li><a href="tnotice.php">Notice</a></li>
                     </ul>
                 </li>
-                <li><a href="tinternal.php">Scorecard</a></li>
+                <li><a href="internal.php">Scorecard</a></li>
                 <li class="dropdown">
                     <a href="#">Courses</a>
                     <ul class="dropdown-content">

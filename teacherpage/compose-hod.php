@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sender_email = $_SESSION['email'];
 
     // Insert into inbox (receiver is always Admin)
-    $stmt = $data->prepare("INSERT INTO `compose-inbox` 
+    $stmt = $data->prepare("INSERT INTO `compose_inbox` 
         (sender_email, receiver_email, subject, message) 
         VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $sender_email, $admin_email, $subject, $message);
