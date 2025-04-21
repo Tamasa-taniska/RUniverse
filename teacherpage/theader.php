@@ -199,7 +199,7 @@ button:hover {
                     <a href="#">Courses</a>
                     <ul class="dropdown-content">
                         <li><a href="#">Syllabus</a></li>
-                        <li><a href="#" onclick="studymaterials()">Study materials</a></li>
+                        <li><a href="StudyMaterial.php">Study materials</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
