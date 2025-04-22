@@ -11,7 +11,7 @@ include 'dbconnect.php';
 
 $email = $_SESSION['email'];
 
-$hod_query = $data->prepare("SELECT email FROM faculty WHERE designation LIKE '%(HOD)%'");
+$hod_query = $data->prepare("SELECT email FROM faculty WHERE designation LIKE '%HOD%'");
 $hod_query->execute();
 $hod_result = $hod_query->get_result();
 $hod = $hod_result->fetch_assoc();
@@ -21,6 +21,7 @@ if (!$hod) {
 }
 
 $hod_email = $hod['email'];
+$receiver_role = "HOD";
 $error = "";
 $success = "";
 
@@ -30,17 +31,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sender_email = $_SESSION['email'];
 
     $stmt = $data->prepare("INSERT INTO `compose_inbox` 
-        (sender_email, receiver_email, subject, message) 
-        VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $sender_email, $hod_email, $subject, $message);
+        (sender_email, receiver_email, subject, message, receiver_role) 
+        VALUES (?, ?, ?, ?, ?)");
     
+    if (!$stmt) {
+        die("Prepare failed: " . $data->error);
+    }
+
+    $stmt->bind_param("sssss", $sender_email, $hod_email, $subject, $message, $receiver_role);
+
     if ($stmt->execute()) {
         $success = "Message sent to HOD.";
     } else {
-        $error = "Failed to send message.";
+        $error = "Failed to send message: " . $stmt->error;
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
