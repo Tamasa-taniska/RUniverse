@@ -60,10 +60,10 @@ if (!$info) {
             <ul>
                 <li><a href="/ravenshaw/adminpage/adminhome.php">Profile</a></li>
                 <li><a href="/ravenshaw/adminpage/studentAction.html">Student Management</a></li>
-                <li><a href="faculty_management.html">Faculty Management</a></li>
+                <li><a href="/ravenshaw/adminpage/faculty_management.html">Faculty Management</a></li>
                 <li><a href="/ravenshaw/adminpage/notice_sender.php">Notice Management</a></li>
-                <li><a href="../adminpage/admin/upload-marks.php">Publish Results</a></li>
-                <li><a href="admin_registration.php">Add Admin</a></li>
+                <li><a href="/ravenshaw/adminpage/admin/upload-marks.php">Publish Results</a></li>
+                <li><a href="/ravenshaw/adminpage/admin_registration.php">Add Admin</a></li>
             </ul>
         </nav>
 
