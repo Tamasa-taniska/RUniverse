@@ -45,6 +45,9 @@ $query_marks = "
 ";
 
 $stmt_marks = $data->prepare($query_marks);
+if (!$stmt_marks) {
+    die("SQL prepare failed: " . $data->error);
+}
 $stmt_marks->bind_param("i", $student_id); // Use student_id for filtering
 $stmt_marks->execute();
 $result_marks = $stmt_marks->get_result();
