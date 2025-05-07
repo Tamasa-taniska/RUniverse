@@ -1,10 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['email']) || !isset($_SESSION['role'])) {
-    session_destroy();
-    header("location: /ravenshaw/studentpage/login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['email']) || !isset($_SESSION['role'])) {
+//     session_destroy();
+//     header("location: /ravenshaw/studentpage/login.php");
+//     exit();
+// }
 
 include '../studentpage/dbconnect.php';
 

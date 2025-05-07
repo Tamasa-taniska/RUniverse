@@ -9,31 +9,26 @@ include '../studentpage/dbconnect.php';
 
 $email = $_SESSION['email'];
 
-// Fetch user details from `users` table
 $sql = "SELECT u.user_id, u.first_name, u.last_name, u.role, u.State, u.City, u.pincode, u.House_No_Building_Name, u.Road_Name_Area_Colony, 
                f.designation, f.email, f.DOB, f.phone_number, f.photo, f.faculty_id
         FROM users u 
         LEFT JOIN faculty f ON u.user_id = f.faculty_id
         WHERE f.email = ?";
-        
+
 $stmt = $data->prepare($sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
 $info = $result->fetch_assoc();
-$username= $info["first_name"];
-$userid= $info["user_id"];
-// $imgpath= 'profile'.$userid;
+$username = $info["first_name"];
+$userid = $info["user_id"];
 
-$imgpath = "uploads/default_photo.jpg"; // Default image path
-$photoCheck = $data->query("SELECT photo FROM faculty WHERE faculty_id = '$userid'");
-$photoRow = $photoCheck->fetch_assoc();
+$imgpath = "uploads/default_photo.jpg";
+$jpgPath = "uploads/profile" . $userid . ".jpg";
+$pngPath = "uploads/profile" . $userid . ".png";
 
-if ($photoRow['photo'] == 1) {
-    $jpgPath = "uploads/profile" . $userid . ".jpg";
-    $pngPath = "uploads/profile" . $userid . ".png";
-    
+if ($info['photo'] == 1) {
     if (file_exists($jpgPath)) {
         $imgpath = $jpgPath;
     } elseif (file_exists($pngPath)) {
@@ -41,11 +36,9 @@ if ($photoRow['photo'] == 1) {
     }
 }
 
-
 if (!$info) {
     die("Error: No faculty data found for this email.");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -54,35 +47,39 @@ if (!$info) {
     <meta charset="UTF-8">
     <title>Faculty Profile</title>
     <link rel="stylesheet" href="tprofile.css">
+    <style>
+        .profile-photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+    </style>
 </head>
 <body>
 <div id="header-placeholder"></div>
 <script>
-    // Load the header content from theader.php
     fetch('theader.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
-            
-            // Now look for the logout button INSIDE this then block
+
             const logoutButton = document.getElementById("logoutButton");
             if (logoutButton) {
                 logoutButton.addEventListener("click", function () {
                     window.location.href = "/ravenshaw/studentpage/logout.php";
                 });
-                console.log("Logout button event listener added.");
-            } else {
-                console.error("Logout button not found!");
             }
         })
         .catch(error => {
             console.error('Error loading header:', error);
         });
 </script>
+
 <div class="container">
     <div class="profile-photo">
-        <img src="profile.jpg" alt="Faculty Photo" id="profile-photo">
-        <input type="file" id="upload" name="photo" accept="image/*" onchange="updatePhoto()" style="margin-top: 10px;">
+        <img src="<?php echo $imgpath; ?>" alt="Faculty Photo" id="profile-photo">
     </div>
 
     <div class="profile-infos">
@@ -101,58 +98,47 @@ if (!$info) {
     </div>
 </div>
 
-<!-- Edit form -->
 <div id="edit-form" style="display: none;">
-<form action="tupdate_profile.php" method="POST" enctype="multipart/form-data">
-
-    <!-- Only include fields allowed to be updated -->
-
+<form action="tupdate_profile.php?faculty_id=<?php echo $info['faculty_id']; ?>" method="POST" enctype="multipart/form-data">
     <div class="edit-form">
         <label>Mobile Number:</label>
-        <input type="text" name="phone_number" value="<?php echo htmlspecialchars($info['phone_number']);?>">
+        <input type="text" name="phone_number" value="<?php echo htmlspecialchars($info['phone_number']); ?>">
     </div>
-
     <div class="edit-form">
         <label>Address:</label>
-        <textarea name="address"><?php echo htmlspecialchars($info['House_No_Building_Name']);?></textarea>
+        <textarea name="House_No_Building_Name"><?php echo htmlspecialchars($info['House_No_Building_Name']); ?></textarea>
     </div>
-
     <div class="edit-form">
         <label>Pincode:</label>
-        <input type="text" name="pincode" value="<?php echo htmlspecialchars($info['pincode']);?>">
+        <input type="text" name="pincode" value="<?php echo htmlspecialchars($info['pincode']); ?>">
     </div>
-
     <div class="edit-form">
         <label>District:</label>
-        <input type="text" name="district" value="<?php echo htmlspecialchars($info['City']);?>">
+        <input type="text" name="City" value="<?php echo htmlspecialchars($info['City']); ?>">
     </div>
-
     <div class="edit-form">
         <label>State:</label>
-        <input type="text" name="state" value="<?php echo htmlspecialchars($info['State']);?>">
+        <input type="text" name="State" value="<?php echo htmlspecialchars($info['State']); ?>">
     </div>
-
     <div class="edit-form">
         <label>Change Photo:</label>
-        <input type="file" name="photo" accept="image">
+        <input type="file" name="photo" accept="image/*">
     </div>
 
     <button class="save-button" type="submit">Save Changes</button>
     <button class="cancel-button" type="button" onclick="cancelEdit()">Cancel</button>
 </form>
-
-    
 </div>
 
 <script>
 function editProfile() {
     document.getElementById("edit-form").style.display = "block";
-    document.querySelector(".container").style.display = "none"; // Hide view mode
+    document.querySelector(".container").style.display = "none";
 }
 
 function cancelEdit() {
     document.getElementById("edit-form").style.display = "none";
-    document.querySelector(".container").style.display = "flex"; // Show view mode
+    document.querySelector(".container").style.display = "flex";
 }
 
 function updatePhoto() {
