@@ -41,7 +41,7 @@ if (!$info) {
                 <p id="rollNo"><b>Roll Number:</b> <?php echo htmlspecialchars($info['roll_number']); ?></p>
             </div>
             <div class="actions">
-                <form method="POST" action="logout.php">
+                <form method="POST" action="/ravenshaw/studentpage/logout.php">
                     <button type="submit" id="logoutButton">Logout</button>
                 </form>
                 <!-- <button id="changePassword" onclick="openChangePasswordModal()">Change Password</button> -->

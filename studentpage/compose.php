@@ -12,6 +12,9 @@ include 'dbconnect.php';
 $email = $_SESSION['email'];
 
 $hod_query = $data->prepare("SELECT email FROM faculty WHERE designation LIKE '%HOD%'");
+if (!$hod_query) {
+    die("SQL prepare failed: " . $data->error);
+}
 $hod_query->execute();
 $hod_result = $hod_query->get_result();
 $hod = $hod_result->fetch_assoc();
