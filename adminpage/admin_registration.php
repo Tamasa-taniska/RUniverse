@@ -7,43 +7,38 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role']
     exit();
 }
 
-$email = $_SESSION['email']; // Admin's email
-
 include("../studentpage/dbconnect.php");
 
-// Error and success messages
 $error = "";
 $success = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collecting form data
+    // Collect form data
     $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'] ?? NULL; // Optional middle name
+    $middle_name = $_POST['middle_name'] ?? NULL;
     $last_name = $_POST['last_name'];
     $pincode = $_POST['pincode'];
     $state = $_POST['state'];
     $city = $_POST['city'];
-    $house_number = $_POST['house_number'];
+    $house_number = $_POST['house_number']; // Corrected field name
     $road_name = $_POST['road_name'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Securely hash password
-    $photo = 0; // Default photo placeholder
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $photo = 0;
 
-    $admin_id = $_POST['admin_id']; // Admin ID to update
-
-    // Step 1: Update users table
-    $sql_users_update = "UPDATE users 
-                         SET first_name = ?, middle_name = ?, last_name = ?, 
-                             pincode = ?, State = ?, City = ?, 
-                             House_No_Building_Name = ?, Road_Name_Area_Colony = ? 
-                         WHERE user_id = ?";
-    $stmt_users = $data->prepare($sql_users_update);
+    // Step 1: Insert into users table
+    $sql_users_insert = "INSERT INTO users 
+                        (first_name, middle_name, last_name, role, 
+                        pincode, State, City, House_No_Building_Name, Road_Name_Area_Colony) 
+                        VALUES (?, ?, ?, 'admin', ?, ?, ?, ?, ?)";
+    
+    $stmt_users = $data->prepare($sql_users_insert);
     if (!$stmt_users) {
         die("Prepare failed for users table: " . $data->error);
     }
 
     $stmt_users->bind_param(
-        "ssssssssi",
+        "ssssssss",
         $first_name,
         $middle_name,
         $last_name,
@@ -51,41 +46,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $state,
         $city,
         $house_number,
-        $road_name,
-        $admin_id // user_id matches admin_id as per the foreign key constraint
+        $road_name
     );
 
     if ($stmt_users->execute()) {
-        // Step 2: Update admin table
-        $sql_admin_update = "UPDATE admin 
-                             SET email = ?, password = ?, photo = ? 
-                             WHERE admin_id = ?";
-        $stmt_admin = $data->prepare($sql_admin_update);
+        $new_user_id = $stmt_users->insert_id; // Get auto-generated user_id
+        
+        // Step 2: Insert into admin table
+        $sql_admin_insert = "INSERT INTO admin 
+                            (admin_id, email, password, photo) 
+                            VALUES (?, ?, ?, ?)";
+        $stmt_admin = $data->prepare($sql_admin_insert);
+        
         if (!$stmt_admin) {
             die("Prepare failed for admin table: " . $data->error);
         }
 
-        $stmt_admin->bind_param("sssi", $email, $password, $photo, $admin_id);
+        $stmt_admin->bind_param("issi", 
+            $new_user_id, // admin_id = user_id (foreign key)
+            $email,
+            $password,
+            $photo
+        );
 
         if ($stmt_admin->execute()) {
-            // Success message
-            $message = "Admin updated successfully for user ID: $admin_id";
-            echo "<script>alert(" . json_encode($message) . ");
-            window.location.href = '../adminhome.php';
-            </script>";
+            $success = "Admin created successfully! User ID: $new_user_id";
         } else {
-            echo "Error updating admin table: " . $stmt_admin->error;
+            $error = "Error creating admin: " . $stmt_admin->error;
         }
-
         $stmt_admin->close();
     } else {
-        echo "Error updating users table: " . $stmt_users->error;
+        $error = "Error creating user: " . $stmt_users->error;
     }
 
     $stmt_users->close();
     $data->close();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -171,10 +167,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 document.getElementById('header-placeholder').innerHTML = data;
             });
     </script>
+
 <div class="container">
     <h1>Admin Registration</h1>
     <?php if ($error) echo "<p class='message'>$error</p>"; ?>
     <?php if ($success) echo "<p class='message success'>$success</p>"; ?>
+    
+    <!-- Corrected form field names -->
     <form method="POST">
         <div class="form-group">
             <label>First Name:</label>
@@ -201,8 +200,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" name="city" required>
         </div>
         <div class="form-group">
+            <!-- Corrected field name: house_number -->
             <label>House No/Building Name:</label>
-            <input type="text" name="house_no" required>
+            <input type="text" name="house_number" required>
         </div>
         <div class="form-group">
             <label>Road Name/Area/Colony:</label>
