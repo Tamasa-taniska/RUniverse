@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" >
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #141414;
+        }
+        header {
+            background-color: #a81616;
+            text-align: center;
+        }
+        header h1{
+            color: white;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 30px auto;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .slide {
+            display: none;
+            width: 100%;
+            position: relative;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.3s;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        /* Course Tabs */
+        .course-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 40px 0 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #bd2f2f;
+        }
+        
+        .tab-btn:hover {
+            color: #58595a;
+        }
+        
+        .tab-btn.active {
+            color: #bd2f2f;
+            border-bottom: 3px solid #bd2f2f;
+        }
+        
+        /* Course Content */
+        .course-content {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .course-content.active {
+            display: block;
+            }
+        
+        .course-overview {
+            margin-bottom: 30px;
+        }
+        
+        .course-info {
+            flex: 1;
+            min-width: 100px;
+        }
+        
+        .info-box {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        /* Faculty Cards*/
+        .faculty-section {
+            margin: 30px ;
+        }
+        
+        .faculty-row {
+           display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #abacac #f1f1f1;
+        }
+        
+        .faculty-card {
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 8px;
+             overflow: hidden; 
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .faculty-img-container {
+            height: 160px;
+            background: #a81616;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .faculty-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+        
+        .faculty-details {
+            padding: 20px;
+        }
+        
+        .faculty-name {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .faculty-designation {
+            color: #4b4b4b;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .faculty-contact {
+            font-size: 14px;
+            color: #777474;
+            margin-bottom: 8px;
+        }
+        
+        .faculty-contact i {
+            color: black;
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Syllabus Section */
+        .syllabus-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .pdf-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #a81616;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .pdf-link:hover {
+            background-color: #58595a;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Professional Courses</h1>
+        </div>
+    </header>
+    <a href="home_page.html"><button style="color: rgb(177, 19, 19);">Home</button></a>
+    <div class="container">
+        <!-- Image Slideshow -->
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="images/ru.jpg" alt="Campus">
+            </div>
+            
+            <div class="slide fade">
+                <img src="images/MC1.jpg" alt="Lab">
+            </div>
+            
+            <div class="slide fade">
+                <img src="images/mc2.jpg" alt="Teaching">
+            </div>
+            
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        
+        <!-- Course Tabs -->
+        <div class="course-tabs">
+            <button class="tab-btn active" onclick="openCourse(event, 'itm')">ITM</button>
+            <button class="tab-btn" onclick="openCourse(event, 'bca')">BCA</button>
+            <button class="tab-btn" onclick="openCourse(event, 'bba')">BBA</button>
+            <button class="tab-btn" onclick="openCourse(event, 'mca')">MCA</button>
+            <button class="tab-btn" onclick="openCourse(event, 'mscit')">MSc IT</button>
+        </div>
+        
+        <!-- ITM Course -->
+        <div id="itm" class="course-content active">
+            <div class="course-overview">
+                <h2>Bachelor of Science in Information Technology & Management (BSc.ITM)</h2>
+                <p>A 3-year undergraduate program that combines information technology with business management.</p>
+            </div>
+            <div class="course-details">
+                <div class="course-info">
+                    <div class="info-box">
+                        <h3>Program Details</h3>
+                        <p><strong>Duration:</strong> 3 Years (6 Semesters)</p>
+                        <p><strong>Eligibility:</strong> 10+2 with Mathematics/Computer Science with minimum 50% marks</p>
+                        <p><strong>Intake Capacity:</strong> 128 Seats</p>
+                        <p><strong>Fee Structure:</strong> ₹45,000 per year</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="faculty-section">
+                    <h3>Faculty Members</h3>
+                    <div class="faculty-row">
+                        <!-- Faculty Card 1 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Dr. RATIKANTA BISWAL</h4>
+                                <p class="faculty-designation">Lecturer & HOD</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> rimun143@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Faculty Card 2 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">MR. DEBASISH KANUNGO</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 10 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> debasish.hhadept@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 8765432109</p>
+                            </div>
+                        </div>
+                        <!-- Faculty Card 3-->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name"> MR. Sailaja Sankar Kanungo</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> SSK@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i>+91 9861376767	</p>
+                            </div>
+                        </div>
+                         <!-- Faculty Card 4-->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name"> MR. SRIKANT KUMAR BEJ</h4>
+                                <p class="faculty-designation">Demonstrator</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 10 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> srikantbej@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9861376767	</p>
+                            </div>
+                        </div>
+                         <!-- Faculty Card 5-->
+                         <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name"> MRS. SILPA PATRA</h4>
+                                <p class="faculty-designation">Demonstrator</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 10 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> silpapatra@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9861068186	</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="syllabus-box">
+                <h3>Course Syllabus</h3>
+                <p>Download the detailed syllabus for ITM program covering all semesters and subjects:</p>
+                <a href="ITM-Syllabus.pdf" class="pdf-link" download><i class="fas fa-download"></i> Download Syllabus PDF</a>
+            </div>
+        </div>
+        
+        <!-- BCA Course -->
+        <div id="bca" class="course-content">
+            <div class="course-overview">
+                <h2>Bachelor of Computer Applications (BCA)</h2>
+                <p>A 3-year undergraduate program focusing on computer applications development, programming languages and software engineering fundamentals.</p>
+            </div>
+            
+            <div class="course-details">
+                <div class="course-info">
+                    <div class="info-box">
+                        <h3>Program Details</h3>
+                        <p><strong>Duration:</strong> 3 Years (6 Semesters)</p>
+                        <p><strong>Eligibility:</strong> 10+2 with Mathematics/Computer Science</p>
+                        <p><strong>Intake Capacity:</strong> 64 Seats</p>
+                        <p><strong>Fee Structure:</strong> ₹40,000 per year</p>
+                    </div>
+                </div>
+                
+                <div class="faculty-section">
+                    <h3>Faculty Members</h3>
+                    <div class="faculty-row">
+                        <!-- Faculty Card 1 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Dr. RATIKANTA BISWAL</h4>
+                                <p class="faculty-designation">Lecturer & HOD</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> rimun143@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Faculty Card 2 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Santosh Kumar Paul</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> SKP3@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                        <!-- Faculty Card 3 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Manas Prasad Rout</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 10 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> MPR@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                        <!-- Faculty Card 4 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="Faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Sailaja Sankar Kanungo</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> SSK@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="syllabus-box">
+                <h3>Course Syllabus</h3>
+                <p>Download the detailed syllabus for BCA program covering all semesters and subjects:</p>
+                <a href="BCA-Syllabus.pdf" class="pdf-link" download><i class="fas fa-download"></i> Download Syllabus PDF</a>
+            </div>
+        </div>
+        <!-- BBA Course -->
+        <div id="bba" class="course-content">
+            <div class="course-overview">
+                <h2>Bachelor of Business Administration (BBA)</h2>
+                <p>A 3-year undergraduate program focusing on business principles and management.</p>
+            </div>
+            <div class="course-details">
+                <div class="course-info">
+                    <div class="info-box">
+                        <h3>Program Details</h3>
+                        <p><strong>Duration:</strong> 3 Years (6 Semesters)</p>
+                        <p><strong>Eligibility:</strong> 10+2 with minimum 50% marks</p>
+                        <p><strong>Intake Capacity:</strong> 64 Seats</p>
+                        <p><strong>Fee Structure:</strong> ₹40,000 per year</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="faculty-section">
+                    <h3>Faculty Members</h3>
+                    <div class="faculty-row">
+                        <!-- Faculty Card 1 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Dr. RATIKANTA BISWAL</h4>
+                                <p class="faculty-designation">Lecturer & HOD</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> rimun143@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Faculty Card 2 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">MR. DEBASISH KANUNGO</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 10 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> debasish.hhadept@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 8765432109</p>
+                            </div>
+                        </div>
+                         <!-- Faculty Card 3-->
+                         <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name"> MRS. Madhumala Tripathy</h4>
+                                <p class="faculty-designation">Demonstrator</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 7 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> madhut@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9861068186	</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="syllabus-box">
+                <h3>Course Syllabus</h3>
+                <p>Download the detailed syllabus for ITM program covering all semesters and subjects:</p>
+                <a href="BBA-Syllabus.pdf" class="pdf-link" download><i class="fas fa-download"></i> Download Syllabus PDF</a>
+            </div>
+        </div>
+        <!-- MCA Course -->
+        <div id="mca" class="course-content">
+            <div class="course-overview">
+                <h2>Master of Computer Applications (MCA)</h2>
+                <p>A 2-year postgraduate program focusing on computer applications.</p>
+            </div>
+            <div class="course-details">
+                <div class="course-info">
+                    <div class="info-box">
+                        <h3>Program Details</h3>
+                        <p><strong>Duration:</strong> 2 Years (4 Semesters)</p>
+                        <p><strong>Eligibility:</strong> 10+2 with minimum 50% marks, Bachelor's degree in Computer Applications/ Computer Science or a related field with min 60% marks</p>
+                        <p><strong>Intake Capacity:</strong> 64 Seats</p>
+                        <p><strong>Fee Structure:</strong> ₹40,000 per year</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="faculty-section">
+                    <h3>Faculty Members</h3>
+                    <div class="faculty-row">
+                        <!-- Faculty Card 1 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Dr. RATIKANTA BISWAL</h4>
+                                <p class="faculty-designation">Lecturer & HOD</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> rimun143@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Faculty Card 2 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Santosh Kumar Paul</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> SKP3@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                         <!-- Faculty Card 3-->
+                         <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Manas Prasad Rout</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 10 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> MPR@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="syllabus-box">
+                <h3>Course Syllabus</h3>
+                <p>Download the detailed syllabus for ITM program covering all semesters and subjects:</p>
+                <a href="MCA-Syllabus.pdf" class="pdf-link" download><i class="fas fa-download"></i> Download Syllabus PDF</a>
+            </div>
+        </div>
+        <!-- MScIT Course -->
+        <div id="mscit" class="course-content">
+            <div class="course-overview">
+                <h2>Master of Science in Information Technology (MSc.IT)</h2>
+                <p>A 2-year postgraduate program focusing on information technologies.</p>
+            </div>
+            <div class="course-details">
+                <div class="course-info">
+                    <div class="info-box">
+                        <h3>Program Details</h3>
+                        <p><strong>Duration:</strong> 2 Years (4 Semesters)</p>
+                        <p><strong>Eligibility:</strong> 10+2 with minimum 50% marks, Bachelor's degree in IT/ Computer Applications/ Computer Science or a related field with min 60% marks</p>
+                        <p><strong>Intake Capacity:</strong> 64 Seats</p>
+                        <p><strong>Fee Structure:</strong> ₹40,000 per year</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="faculty-section">
+                    <h3>Faculty Members</h3>
+                    <div class="faculty-row">
+                        <!-- Faculty Card 1 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Dr. RATIKANTA BISWAL</h4>
+                                <p class="faculty-designation">Lecturer & HOD</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> rimun143@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Faculty Card 2 -->
+                        <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Santosh Kumar Paul</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 15 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> SKP3@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                         <!-- Faculty Card 3-->
+                         <div class="faculty-card">
+                            <div class="faculty-img-container">
+                                <img src="profile.jpg" alt="faculty" class="faculty-img">
+                            </div>
+                            <div class="faculty-details">
+                                <h4 class="faculty-name">Manas Prasad Rout</h4>
+                                <p class="faculty-designation">Lecturer</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-briefcase"></i> 10 Years Experience</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-envelope"></i> MPR@gmail.com</p>
+                                <p class="faculty-contact"><i class="fa-solid fa-phone"></i> +91 9437928680</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="syllabus-box">
+                <h3>Course Syllabus</h3>
+                <p>Download the detailed syllabus for ITM program covering all semesters and subjects:</p>
+                <a href="MScIT-Syllabus.pdf" class="pdf-link" download><i class="fas fa-download"></i> Download Syllabus PDF</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Slideshow functionality
+        let slideIndex = 1;
+        showSlides(slideIndex);
+        
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            
+            slides[slideIndex-1].style.display = "block";  
+        }
+        
+        // Auto slide change every 5 seconds
+        setInterval(function() {
+            plusSlides(1);
+        }, 5000);
+        
+        // Course tab functionality
+        function openCourse(evt, courseName) {
+            let i, tabcontent, tablinks;
+            
+            tabcontent = document.getElementsByClassName("course-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+            }
+            
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(courseName).className += " active";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>

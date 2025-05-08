@@ -1,341 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facilities</title>
-    <link rel="stylesheet" href="facilities.css">
+    <title>University Facilities</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
-
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
         header {
-            background: rgb(177, 19, 19);
-            color: #fff;
-            padding: 20px 0;
+            background-color: #8e1c1c;
+            color: white;
             text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
         }
-
-        main {
-            padding: 20px;
+        
+        h1 {
+            font-size: 2.5rem;
         }
-
-        .facility-row {
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .facilities-grid {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin-bottom: 3rem;
         }
-
-        .facility {
-            background: #fff;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            flex: 0 0 28%;
-            /* Adjust width to fit three in a row */
+        
+        .facility-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(29, 28, 28, 0.1);
+            flex: 1 1 calc(33.333% - 25px);
+            min-width: 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+        
+        .facility-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .facility-title {
+            background-color: #8e1c1c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+        
+        .slider-container {
             position: relative;
-        }
-
-        h2 {
-            color: rgb(177, 19, 19);
-        }
-
-        .slider {
-            position: relative;
-            max-width: 100%;
-            margin: auto;
+            width: 100%;
+            aspect-ratio: 16/9;
             overflow: hidden;
         }
-
-        .slides {
+        
+        .slider {
             display: flex;
+            height: 100%;
             transition: transform 0.5s ease;
         }
-
-        .slides img {
-            max-width: 100%;
-            border-radius: 8px;
+        
+        .slide {
+            min-width: 100%;
         }
-
-        .dots {
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .slider-dots {
             text-align: center;
-            margin-top: 10px;
+            padding: 10px 0;
         }
-
-        .dots span {
-            height: 10px;
-            width: 10px;
-            margin: 0 2px;
+        
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
             background-color: #bbb;
             border-radius: 50%;
-            display: inline-block;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-
-        .dots .active {
-            background-color: rgb(177, 19, 19);
-        }
-
         
-button {
-    background-color: transparent;
-    color: #006666;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-
-
-/* button animations */
-button {
-    transition: transform 0.1s ease-in-out;
-}
-
-button:hover {
-    transform: scale(1.1);
-}
+        .dot.active {
+            background-color: #8e1c1c;
+        }
+        
+        .facility-desc {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .home-btn {
+            margin: 0px;
+            color:#8e1c1c;
+            font-weight: bolder;
+           text-decoration: none;
+           font-size: large;
+        }
+        
+        
     </style>
 </head>
-
 <body>
     <header>
-        <h1>Our Facilities</h1>
+        <h1>Our Campus Facilities</h1>
     </header>
-    <a href="home_page.html"><button style="color: rgb(177, 19, 19);">Home</button></a>
-    <main>
-        <div class="facility-row">
-            <section class="facility" id="sports">
-                <h2>Sports</h2>
-                <p>Our sports facilities include a gymnasium, outdoor fields, and courts for various sports, catering to
-                    athletic excellence. From cricket to basketball, football to badminton, we provide ample
-                    opportunities to hone your skills. Specialized training sessions and state-of-the-art equipment
-                    ensure a competitive edge.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Sports Facility 1">
-                        <img src="images/b&h.jpg" alt="Sports Facility 2">
-                        <img src="images/b&h.jpg" alt="Sports Facility 3">
+    <a href="home_page.html" class="home-btn">Home</a>
+    <div class="container">
+        <div class="facilities-grid">
+            <!-- Facility 1 -->
+            <div class="facility-card">
+                <div class="facility-title">Priority Parking</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/park.jpg" alt="Parking">
+                        </div>
+                        <div class="slide">
+                            <img src="images/park1.jpg" alt="Parking">
+                        </div>
                     </div>
-                    <div class="dots"></div>
                 </div>
-            </section>
-
-            <section class="facility" id="cafeteria">
-                <h2>Cafeteria</h2>
-                <p>Our cafeteria offers a diverse menu of freshly prepared meals and snacks. With a lively ambiance and
-                    hygienic standards, it's the go-to spot for students to unwind and recharge. Healthy options and
-                    hearty treats cater to everyone's taste.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Cafeteria 1">
-                        <img src="images/b&h.jpg" alt="Cafeteria 2">
-                        <img src="images/b&h.jpg" alt="Cafeteria 3">
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>Reserved parking spaces near key buildings ensure convenience and proximity for individuals requiring
+                        enhanced accessibility. Strategically placed, these spaces help create a hassle-free campus
+                        experience.</p>
+                </div>
+            </div>
+            
+            <!-- Facility 2 -->
+            <div class="facility-card">
+                <div class="facility-title">Library</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/lib.jpg" alt="Library">
+                        </div>
+                        <div class="slide">
+                            <img src="images/lib1.jpg" alt="Library1">
+                        </div>
                     </div>
-                    <div class="dots"></div>
                 </div>
-            </section>
-
-            <section class="facility" id="auditorium">
-                <h2>Auditorium</h2>
-                <p>A spacious auditorium equipped with advanced lighting and sound systems. It serves as the heart of
-                    our campus, hosting cultural programs, guest lectures, and annual events. This multi-purpose venue
-                    inspires creativity and collaboration.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Auditorium 1">
-                        <img src="images/b&h.jpg" alt="Auditorium 2">
-                        <img src="images/b&h.jpg" alt="Auditorium 3">
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>Our library houses a rich collection of books, journals, and digital resources. With dedicated study
+                        zones and research-friendly tools, it's the ideal environment for intellectual growth and discovery.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Facility 3 -->
+            <div class="facility-card">
+                <div class="facility-title">Laboratory</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/lab.jpg" alt="Lab">
+                        </div>
+                        <div class="slide">
+                            <img src="images/lab1.jpg" alt="Lab1">
+                        </div>
                     </div>
-                    <div class="dots"></div>
                 </div>
-            </section>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>State-of-the-art laboratories empower students to turn theoretical concepts into practical solutions.
+                        Well-equipped for a variety of disciplines, they nurture innovation and experimental learning.</p>
+                </div>
+            </div>
+            
+            <!-- Facility 4 -->
+            <div class="facility-card">
+                <div class="facility-title">Outdoor Amphitheater</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/amp.jpg" alt="amphitheater">
+                        </div>
+                        <div class="slide">
+                            <img src="images/amp1.jpg" alt="amphitheater1">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>An inspiring open-air auditorium where ideas and talents take center stage. With tiered seating that
+                        blends functionality with comfort, this space is perfect for cultural events, discussions, and
+                        lively student gatherings under the sky.</p>
+                </div>
+            </div>
+            
+            <!-- Facility 5 -->
+            <div class="facility-card">
+                <div class="facility-title">Cafeteria</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/cafe.jpg" alt="Cafeteria">
+                        </div>
+                        <div class="slide">
+                            <img src="images/cafe1.jpg" alt="cafeteria1">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>Our cafeteria offers a diverse menu of freshly prepared meals and snacks. With a lively ambiance and
+                        hygienic standards, it's the go-to spot for students to unwind and recharge. Healthy options and
+                        hearty treats cater to everyone's taste.</p>
+                </div>
+            </div>
+            
+            <!-- Facility 6 -->
+            <div class="facility-card">
+                <div class="facility-title">NCC/NSS</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/ncc.jpg" alt="NCC">
+                        </div>
+                        <div class="slide">
+                            <img src="images/ncc1.jpg" alt="NCC">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>The NCC/NSS units offer students a chance to engage in national service and leadership programs.
+                        Through community projects, camps, and drills, they instill discipline, social responsibility, and a
+                        sense of patriotism.</p>
+                </div>
+            </div>
+            
+            <!-- Facility 7 -->
+            <div class="facility-card">
+                <div class="facility-title">Inclusive Resources</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/incR.jpg" alt="Elevator">
+                        </div>
+                        <div class="slide">
+                            <img src="images/incR1.jpg" alt="aqua">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>Wheelchair ramps, aquaguard, elevators ensure seamless mobility, making every corner of the campus accessible
+                        to all students and visitors. Designed with precision, they reflect our commitment to fostering
+                        inclusivity and independence for everyone.</p>
+                </div>
+            </div>
+            
+            <!-- Facility 8 -->
+            <div class="facility-card">
+                <div class="facility-title">Smart Room</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/cls.jpg" alt="Classroom">
+                        </div>
+                        <div class="slide">
+                            <img src="images/cls1.jpg" alt="Classroom">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>Step into the future of learning with smart classrooms equipped with interactive boards,
+                        high-definition projectors, and advanced audio-visual tools. These technology-enabled spaces make
+                        education immersive, collaborative, and impactful.</p>
+                </div>
+            </div>
+            
+            <!-- Facility 9 -->
+            <div class="facility-card">
+                <div class="facility-title">Rest Room</div>
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="images/rest.jpg" alt="rest Room">
+                        </div>
+                        <div class="slide">
+                            <img src="images/rest1.jpg" alt="restroom">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="facility-desc">
+                    <p>Our accessible restrooms are thoughtfully designed for convenience, ensuring a dignified and
+                        comfortable experience for everyone. They are maintained to the highest standards of cleanliness and
+                        usability for all.</p>
+                </div>
+            </div>
         </div>
-        <div class="facility-row">
-            <section class="facility" id="library">
-                <h2>Library</h2>
-                <p>Our library houses a rich collection of books, journals, and digital resources. With dedicated study
-                    zones and research-friendly tools, it's the ideal environment for intellectual growth and discovery.
-                </p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Sports Facility 1">
-                        <img src="images/b&h.jpg" alt="Sports Facility 2">
-                        <img src="images/b&h.jpg" alt="Sports Facility 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
+        
+    </div>
 
-            <section class="facility" id="lab">
-                <h2>Laboratory</h2>
-                <p>State-of-the-art laboratories empower students to turn theoretical concepts into practical solutions.
-                    Well-equipped for a variety of disciplines, they nurture innovation and experimental learning.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Cafeteria 1">
-                        <img src="images/b&h.jpg" alt="Cafeteria 2">
-                        <img src="images/b&h.jpg" alt="Cafeteria 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-
-            <section class="facility" id="ncc/nss">
-                <h2>NCC/NSS</h2>
-                <p>The NCC/NSS units offer students a chance to engage in national service and leadership programs.
-                    Through community projects, camps, and drills, they instill discipline, social responsibility, and a
-                    sense of patriotism.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Auditorium 1">
-                        <img src="images/b&h.jpg" alt="Auditorium 2">
-                        <img src="images/b&h.jpg" alt="Auditorium 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-        </div>
-        <div class="facility-row">
-            <section class="facility" id="outdoor amphitheater:">
-                <h2>Outdoor Amphitheater</h2>
-                <p>An inspiring open-air auditorium where ideas and talents take center stage. With tiered seating that
-                    blends functionality with comfort, this space is perfect for cultural events, discussions, and
-                    lively student gatherings under the sky.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Sports Facility 1">
-                        <img src="images/b&h.jpg" alt="Sports Facility 2">
-                        <img src="images/b&h.jpg" alt="Sports Facility 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-
-            <section class="facility" id="smart classrooms">
-                <h2>Smart Classrooms</h2>
-                <p>Step into the future of learning with smart classrooms equipped with interactive boards,
-                    high-definition projectors, and advanced audio-visual tools. These technology-enabled spaces make
-                    education immersive, collaborative, and impactful.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Cafeteria 1">
-                        <img src="images/b&h.jpg" alt="Cafeteria 2">
-                        <img src="images/b&h.jpg" alt="Cafeteria 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-
-            <section class="facility" id="sick room">
-                <h2>Sick Room</h2>
-                <p>Your well-being is our priority. The fully equipped sick room offers a quiet, hygienic environment
-                    for rest and first aid. With essential medical supplies and a caring approach, it ensures students
-                    receive prompt attention and comfort.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Auditorium 1">
-                        <img src="images/b&h.jpg" alt="Auditorium 2">
-                        <img src="images/b&h.jpg" alt="Auditorium 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-        </div>
-        <div class="facility-row">
-            <section class="facility" id="inclusive resources">
-                <h2>Inclusive Resources</h2>
-                <p>Wheelchair ramps and elevators ensure seamless mobility, making every corner of the campus accessible
-                    to all students and visitors. Designed with precision, they reflect our commitment to fostering
-                    inclusivity and independence for everyone.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Sports Facility 1">
-                        <img src="images/b&h.jpg" alt="Sports Facility 2">
-                        <img src="images/b&h.jpg" alt="Sports Facility 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-
-            <section class="facility" id="priority parking">
-                <h2>Priority Parking</h2>
-                <p>Reserved parking spaces near key buildings ensure convenience and proximity for individuals requiring
-                    enhanced accessibility. Strategically placed, these spaces help create a hassle-free campus
-                    experience.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Auditorium 1">
-                        <img src="images/b&h.jpg" alt="Auditorium 2">
-                        <img src="images/b&h.jpg" alt="Auditorium 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-
-            <section class="facility" id="restrooms">
-                <h2>Restrooms</h2>
-                <p>Our accessible restrooms are thoughtfully designed for convenience, ensuring a dignified and
-                    comfortable experience for everyone. They are maintained to the highest standards of cleanliness and
-                    usability for all.</p>
-                <div class="slider">
-                    <div class="slides">
-                        <img src="images/b&h.jpg" alt="Cafeteria 1">
-                        <img src="images/b&h.jpg" alt="Cafeteria 2">
-                        <img src="images/b&h.jpg" alt="Cafeteria 3">
-                    </div>
-                    <div class="dots"></div>
-                </div>
-            </section>
-        </div>
-
-    </main>
     <script>
-        let currentIndex = 0;
-
-        function showSlides(section) {
-            const slides = section.querySelector('.slides');
-            const dots = section.querySelectorAll('.dots span');
-
-            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[currentIndex].classList.add('active');
-        }
-
-        function initSliders() {
-            const facilitySections = document.querySelectorAll('.facility');
-
-            facilitySections.forEach(section => {
-                const slides = section.querySelector('.slides');
-                const images = slides.querySelectorAll('img');
-                const dotsContainer = section.querySelector('.dots');
-
-                // Create dots for each image
-                images.forEach((_, index) => {
-                    const dot = document.createElement('span');
-                    dot.addEventListener('click', () => {
-                        currentIndex = index;
-                        showSlides(section);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all sliders
+            const facilityCards = document.querySelectorAll('.facility-card');
+            let slideIntervals = {};
+            
+            facilityCards.forEach((card, index) => {
+                const slider = card.querySelector('.slider');
+                const slides = card.querySelectorAll('.slide');
+                const dots = card.querySelectorAll('.dot');
+                let currentSlide = 0;
+                
+                // Function to go to specific slide
+                const goToSlide = (slideIndex) => {
+                    currentSlide = slideIndex;
+                    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    
+                    // Update dots
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentSlide);
                     });
-                    dotsContainer.appendChild(dot);
+                };
+                
+                // Add click events to dots
+                dots.forEach((dot, dotIndex) => {
+                    dot.addEventListener('click', () => {
+                        clearInterval(slideIntervals[index]);
+                        goToSlide(dotIndex);
+                        startAutoRotation(index);
+                    });
+                });
+                
+                // Function to start auto rotation
+                const startAutoRotation = (cardIndex) => {
+                    clearInterval(slideIntervals[cardIndex]);
+                    slideIntervals[cardIndex] = setInterval(() => {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        goToSlide(currentSlide);
+                    }, 5000);
+                };
+                
+                // Initialize first slide and start rotation
+                goToSlide(0);
+                startAutoRotation(index);
+                
+                // Pause on hover
+                card.addEventListener('mouseenter', () => {
+                    clearInterval(slideIntervals[index]);
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    startAutoRotation(index);
                 });
             });
-
-            showSlides(facilitySections[0]); // Show first section slides
-        }
-
-        // Initialize sliders on page load
-        window.onload = initSliders;
+        });
     </script>
 </body>
-
 </html>

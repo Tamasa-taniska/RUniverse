@@ -42,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Notice Form</title>
     <style>
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
+            --primary-color:rgb(177, 19, 19);
+            --secondary-color:rgb(177, 19, 19);;
             --light-color: #f8f9fa;
             --dark-color: #212529;
-            --success-color: #4bb543;
+            --success-color: rgb(177, 19, 19);;
             --error-color: #ff3333;
         }
         
