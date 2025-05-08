@@ -1,10 +1,10 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['email']) || !isset($_SESSION['role'])) {
-//     session_destroy();
-//     header("location: /ravenshaw/studentpage/login.php");
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['email']) || !isset($_SESSION['role'])) {
+    session_destroy();
+    header("location: /ravenshaw/studentpage/login.php");
+    exit();
+}
 
 include '../studentpage/dbconnect.php';
 
@@ -15,12 +15,12 @@ $hod_check_query->execute();
 $hod_check_result = $hod_check_query->get_result();
 $hod_check = $hod_check_result->fetch_assoc();
 
+// Corrected strpos check
 if ($hod_check && strpos($hod_check['designation'], '(HOD)') !== false) {
     // Redirect HODs to compose-hod.php
     header("Location: compose-hod.php");
     exit();
 }
-
 
 // Get the HOD's email for faculty users
 $hod_query = $data->prepare("SELECT email FROM faculty WHERE designation LIKE '%(HOD)%'");
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sender_email = $_SESSION['email'];
 
     // Insert into inbox (receiver is always HOD)
-    $stmt = $data->prepare("INSERT INTO `compose-inbox` 
+    $stmt = $data->prepare("INSERT INTO `compose_inbox` 
         (sender_email, receiver_email, subject, message) 
         VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $sender_email, $hod_email, $subject, $message);
